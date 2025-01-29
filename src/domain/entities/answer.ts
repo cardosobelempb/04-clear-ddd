@@ -1,16 +1,10 @@
-import { randomUUID } from 'crypto'
 import { AnswerRequest } from '../../application/request/answer.request'
+import { Entity } from '../../shared/domain/entities/entity'
 
-export class Answer {
-  id: string
-  content: string
-  authorId: string
-  questionId: string
+export class Answer extends Entity<AnswerRequest.Answer> {
 
-  constructor(props: AnswerRequest.Answer, id?: string) {
-    this.id = id ?? randomUUID()
-    this.content = props.content
-    this.authorId = props.authorId
-    this.questionId = props.questionId
+  get content() {
+    return this.props.content
   }
+
 }

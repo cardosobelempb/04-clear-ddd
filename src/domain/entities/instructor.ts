@@ -1,11 +1,4 @@
-import { randomUUID } from 'crypto'
+import { InstructorRequest } from '../../application/request/instructor.request'
+import { Entity } from '../../shared/domain/entities/entity'
 
-export class Instructor {
-  id: string
-  name: string
-
-  constructor(name: string, id?: string) {
-    this.id = id ?? randomUUID()
-    this.name = name
-  }
-}
+export class Instructor extends Entity<InstructorRequest.Instructor> {}
