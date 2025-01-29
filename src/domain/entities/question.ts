@@ -1,13 +1,16 @@
 import { randomUUID } from 'crypto'
+import { QuestionRequest } from '../../application/request/question.request'
 
 export class Question {
   id: string
   title: string
-  description: string
+  content: string
+  authorId: string
 
-  constructor(title: string, description: string, id?: string) {
+  constructor(props: QuestionRequest.Question, id?: string) {
     this.id = id ?? randomUUID()
-    this.title = title
-    this.description = description
+    this.title = props.title
+    this.content = props.content
+    this.authorId = props.authorId
   }
 }
