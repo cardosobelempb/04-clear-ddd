@@ -1,4 +1,4 @@
-import { Slug } from "../../shared/domain/entities/value-objects/slug"
+import { Slug } from "../../shared/domain/entities/value-objects/slug/slug"
 
 export namespace QuestionRequest {
   export interface Question {
