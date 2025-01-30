@@ -1,14 +1,18 @@
-import { Slug } from "../../shared/domain/entities/value-objects/slug/slug"
+import { Slug } from '../../shared/domain/entities/value-objects/slug/slug'
+import { UniqueEnttiyUUID } from '../../shared/domain/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
 
 export namespace QuestionRequest {
   export interface Question {
+    authorId: UniqueEnttiyUUID
+    bestAnswerId?: UniqueEnttiyUUID
     title: string
     content: string
     slug: Slug
-    authorId: string
+    createdAt: Date
+    updatedAt?: Date
   }
 
   export interface Id {
-    questionId: string
+    questionId: UniqueEnttiyUUID
   }
 }

@@ -1,17 +1,21 @@
+import { UniqueEnttiyUUID } from '../../shared/domain/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
+
 export namespace AnswerRequest {
   export interface Answer {
+    authorId: UniqueEnttiyUUID
+    questionId: UniqueEnttiyUUID
     content: string
-    authorId: string
-    questionId: string
+    createdAt: Date
+    updatedAt?: Date
   }
 
   export interface Create {
-    instructorId: string
-    questionId: string
+    instructorId: UniqueEnttiyUUID
+    questionId: UniqueEnttiyUUID
     content: string
   }
 
   export interface Id {
-    answerId: string
+    answerId: UniqueEnttiyUUID
   }
 }
