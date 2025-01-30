@@ -1,6 +1,6 @@
-import { AnswerEntity } from '../../../domain/entities/answer.entity'
-import { AnswerRepository } from '../../../domain/repositories/answer/answer.repository'
-import { UniqueEntityUUID } from '../../../shared/domain/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
+import { AnswerEntity } from '@/domain/entities/answer.entity'
+import { AnswerRepository } from '@/domain/repositories/answer/answer.repository'
+import { UniqueEntityUUID } from '@/shared/domain/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
 
 export namespace Answer {
   export interface Request {

@@ -1,5 +1,5 @@
-import { Entity } from '../../shared/domain/entities/entity'
-import { UniqueEntityUUID } from '../../shared/domain/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
+import { Entity } from '@/shared/domain/entities/entity'
+import { UniqueEntityUUID } from '@/shared/domain/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
 
 export namespace InstructorProps {
   export interface Props {

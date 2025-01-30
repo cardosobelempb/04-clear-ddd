@@ -1,8 +1,8 @@
+import { Entity } from '@/shared/domain/entities/entity'
+import { Slug } from '@/shared/domain/entities/value-objects/slug/slug'
+import { UniqueEntityUUID } from '@/shared/domain/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
+import { Optional } from '@/shared/domain/types/optional'
 import dayjs from 'dayjs'
-import { Entity } from '../../shared/domain/entities/entity'
-import { Slug } from '../../shared/domain/entities/value-objects/slug/slug'
-import { UniqueEntityUUID } from '../../shared/domain/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
-import { Optional } from '../../shared/domain/types/optional'
 
 export namespace QuestionProps {
   export interface Props {

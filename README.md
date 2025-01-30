@@ -11,3 +11,4 @@
 ## dependencias
 
 - npm i dayjs -S
+- npm i vite-tsconfig-paths -D

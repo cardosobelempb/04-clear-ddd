@@ -1,6 +1,5 @@
-import { expect, test } from 'vitest'
+import { AnswerInMemoryRepository } from '@/domain/repositories/answer/in-memory/answer-in-memory.reposritory'
 
-import { AnswerInMemoryRepository } from '../../../domain/repositories/answer/in-memory/answer-in-memory.reposritory'
 import { AnswerQuestionUseCase } from './answer-question'
 
 test('Create an answer', async () => {
