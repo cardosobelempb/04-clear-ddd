@@ -1,7 +1,7 @@
-import { Entity } from '@/shared/domain/entities/entity'
-import { Slug } from '@/shared/domain/entities/value-objects/slug/slug'
-import { UniqueEntityUUID } from '@/shared/domain/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
-import { Optional } from '@/shared/domain/types/optional'
+import { Entity } from '@/shared/enterprise/entities/entity'
+import { Slug } from '@/shared/enterprise/entities/value-objects/slug/slug'
+import { UniqueEntityUUID } from '@/shared/enterprise/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
+import { Optional } from '@/shared/enterprise/types/optional'
 import dayjs from 'dayjs'
 
 export namespace QuestionProps {
@@ -90,6 +90,6 @@ export class QuestionEntity extends Entity<QuestionProps.Props> {
       id,
     )
 
-    return question
+    return { question }
   }
 }

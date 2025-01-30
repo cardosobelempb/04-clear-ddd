@@ -1,4 +1,4 @@
-import { AnswerInMemoryRepository } from '@/domain/repositories/answer/in-memory/answer-in-memory.reposritory'
+import { AnswerInMemoryRepository } from '@/enterprise/repositories/answer/in-memory/answer-in-memory.reposritory'
 
 import { AnswerQuestionUseCase } from './answer-question'
 

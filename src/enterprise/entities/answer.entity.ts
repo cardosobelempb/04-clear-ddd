@@ -1,6 +1,6 @@
-import { Entity } from '@/shared/domain/entities/entity'
-import { UniqueEntityUUID } from '@/shared/domain/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
-import { Optional } from '@/shared/domain/types/optional'
+import { Entity } from '@/shared/enterprise/entities/entity'
+import { UniqueEntityUUID } from '@/shared/enterprise/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
+import { Optional } from '@/shared/enterprise/types/optional'
 
 export namespace AnswerProps {
   export interface Props {
@@ -61,6 +61,6 @@ export class AnswerEntity extends Entity<AnswerProps.Props> {
       id,
     )
 
-    return answer
+    return { answer }
   }
 }
