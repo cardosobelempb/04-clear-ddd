@@ -1,12 +1,12 @@
-import { UniqueEnttiyUUID } from './value-objects/unique-entity-uuid/unique-entity-uuid'
+import { UniqueEntityUUID } from './value-objects/unique-entity-uuid/unique-entity-uuid'
 
 export class Entity<Props> {
-  private _id: UniqueEnttiyUUID
+  private _id: UniqueEntityUUID
   protected props: Props
 
-  protected constructor(props: Props, id?: UniqueEnttiyUUID) {
+  protected constructor(props: Props, id?: UniqueEntityUUID) {
     this.props = props
-    this._id = id ?? new UniqueEnttiyUUID(id)
+    this._id = id ?? new UniqueEntityUUID(id)
   }
 
   get id() {

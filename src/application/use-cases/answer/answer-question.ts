@@ -1,6 +1,6 @@
-import { Answer } from '../../../domain/entities/answer'
+import { AnswerEntity } from '../../../domain/entities/answer.entity'
 import { AnswerRepository } from '../../../domain/repositories/answer/answer.repository'
-import { UniqueEnttiyUUID } from '../../../shared/domain/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
+import { UniqueEntityUUID } from '../../../shared/domain/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
 
 export namespace Answer {
   export interface Request {
@@ -20,10 +20,10 @@ export class AnswerQuestionUseCase {
   constructor(private readonly answerRepository: AnswerRepository) {}
 
   async execute({ authorId, questionId, content }: Answer.Request) {
-    const answer = Answer.create({
+    const answer = AnswerEntity.create({
       content,
-      authorId: new UniqueEnttiyUUID(authorId),
-      questionId: new UniqueEnttiyUUID(questionId),
+      authorId: new UniqueEntityUUID(authorId),
+      questionId: new UniqueEntityUUID(questionId),
     })
 
     await this.answerRepository.create(answer)

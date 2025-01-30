@@ -1,5 +1,5 @@
-import { Answer } from "../../entities/answer";
+import { AnswerEntity } from '../../entities/answer.entity'
 
 export abstract class AnswerRepository {
-  abstract create(answer: Answer): Promise<void>
+  abstract create(answer: AnswerEntity): Promise<void>
 }

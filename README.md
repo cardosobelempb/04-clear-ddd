@@ -7,3 +7,7 @@
 ## Test
 
 - npm i vitest -D
+
+## dependencias
+
+- npm i dayjs -S
