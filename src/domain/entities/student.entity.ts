@@ -14,6 +14,7 @@ export class StudentEntity extends Entity<InstructorProps.Props> {
   get name() {
     return this.props.name
   }
+
   static create(props: InstructorProps.Props, id?: UniqueEntityUUID) {
     const student = new StudentEntity(props, id)
 
