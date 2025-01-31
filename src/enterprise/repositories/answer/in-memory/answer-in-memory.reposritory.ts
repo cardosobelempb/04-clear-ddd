@@ -1,6 +1,9 @@
-import { AnswerEntity } from '../../../entities/answer.entity'
-import { AnswerRepository } from '../answer.repository'
+import { AnswerEntity } from '@/enterprise/entities/answer.entity'
+import { AnswerRepository } from '@/enterprise/repositories/answer/answer.repository'
 
 export class AnswerInMemoryRepository implements AnswerRepository {
-  async create(answer: AnswerEntity): Promise<void> {}
+  public items: AnswerEntity[] = []
+  async create(entity: AnswerEntity): Promise<void> {
+    this.items.push(entity)
+  }
 }

@@ -10,16 +10,18 @@ export namespace Answer {
   }
 
   export interface Response {
-    authorId: string
-    questionId: string
-    content: string
+    answer: AnswerEntity
   }
 }
 
-export class AnswerQuestionUseCase {
+export class AnswerQuestion {
   constructor(private readonly answerRepository: AnswerRepository) {}
 
-  async execute({ authorId, questionId, content }: Answer.Request) {
+  async execute({
+    authorId,
+    questionId,
+    content,
+  }: Answer.Request): Promise<Answer.Response> {
     const { answer } = AnswerEntity.create({
       content,
       authorId: new UniqueEntityUUID(authorId),
@@ -27,6 +29,6 @@ export class AnswerQuestionUseCase {
     })
 
     await this.answerRepository.create(answer)
-    return answer
+    return { answer }
   }
 }

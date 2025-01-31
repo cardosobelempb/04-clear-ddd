@@ -14,7 +14,7 @@ export namespace Question {
   }
 }
 
-export class QuestionCreateUseCase {
+export class QuestionCreate {
   constructor(private readonly questionRepository: QuestionRepository) {}
 
   async execute({
