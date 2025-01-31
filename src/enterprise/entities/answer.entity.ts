@@ -61,6 +61,6 @@ export class AnswerEntity extends Entity<AnswerProps.Props> {
       id,
     )
 
-    return { answer }
+    return answer
   }
 }

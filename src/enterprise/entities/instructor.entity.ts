@@ -19,6 +19,6 @@ export class InstructorEntity extends Entity<InstructorProps.Props> {
   static create(props: InstructorProps.Props, id?: UniqueEntityUUID) {
     const instructor = new InstructorEntity(props, id)
 
-    return { instructor }
+    return instructor
   }
 }

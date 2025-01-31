@@ -22,7 +22,7 @@ export class AnswerQuestion {
     questionId,
     content,
   }: Answer.Request): Promise<Answer.Response> {
-    const { answer } = AnswerEntity.create({
+    const answer = AnswerEntity.create({
       content,
       authorId: new UniqueEntityUUID(authorId),
       questionId: new UniqueEntityUUID(questionId),

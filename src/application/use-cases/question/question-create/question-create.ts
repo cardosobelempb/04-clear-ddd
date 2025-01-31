@@ -22,7 +22,7 @@ export class QuestionCreate {
     title,
     content,
   }: Question.Request): Promise<Question.Response> {
-    const { question } = QuestionEntity.create({
+    const question = QuestionEntity.create({
       authorId: new UniqueEntityUUID(authorId),
       title,
       content,

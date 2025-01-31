@@ -90,6 +90,6 @@ export class QuestionEntity extends Entity<QuestionProps.Props> {
       id,
     )
 
-    return { question }
+    return question
   }
 }
