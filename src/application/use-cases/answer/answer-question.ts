@@ -2,7 +2,7 @@ import { AnswerEntity } from '@/enterprise/entities/answer.entity'
 import { AnswerRepository } from '@/enterprise/repositories/answer/answer.repository'
 import { UniqueEntityUUID } from '@/shared/enterprise/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
 
-export namespace Answer {
+export namespace AnswerQuestion {
   export interface Request {
     authorId: string
     questionId: string
@@ -21,7 +21,7 @@ export class AnswerQuestion {
     authorId,
     questionId,
     content,
-  }: Answer.Request): Promise<Answer.Response> {
+  }: AnswerQuestion.Request): Promise<AnswerQuestion.Response> {
     const answer = AnswerEntity.create({
       content,
       authorId: new UniqueEntityUUID(authorId),
