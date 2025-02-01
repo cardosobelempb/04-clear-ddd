@@ -5,7 +5,7 @@ import {
 import { UniqueEntityUUID } from '@/shared/enterprise/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
 import { faker } from '@faker-js/faker'
 
-export function questionCreateMake(
+export function questionMake(
   override: Partial<QuestionProps.Props> = {},
   id?: UniqueEntityUUID,
 ) {

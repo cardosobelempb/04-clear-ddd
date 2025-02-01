@@ -1,7 +1,7 @@
 import { QuestionInMemoryRepository } from '@/enterprise/repositories/question/in-memory/question-in-memory.reposritory'
 
 import { UniqueEntityUUID } from '@/shared/enterprise/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
-import { questionCreateMake } from '../question-create/question-create.make'
+import { questionMake } from '../make/question.make'
 import { QuestionDelete } from './question-delete'
 
 let questionRepository: QuestionInMemoryRepository
@@ -12,7 +12,7 @@ describe('QuestionDelete', () => {
     sut = new QuestionDelete(questionRepository)
   })
   it('should be able to delete question', async () => {
-    const newQuestion = questionCreateMake(
+    const newQuestion = questionMake(
       { authorId: new UniqueEntityUUID('author-1') },
       new UniqueEntityUUID('question-1'),
     )
@@ -27,7 +27,7 @@ describe('QuestionDelete', () => {
     expect(questionRepository.items).toHaveLength(0)
   })
   it('should not be able to delete question from author user', async () => {
-    const newQuestion = questionCreateMake(
+    const newQuestion = questionMake(
       { authorId: new UniqueEntityUUID('author-1') },
       new UniqueEntityUUID('question-1'),
     )

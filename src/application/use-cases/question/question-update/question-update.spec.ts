@@ -1,7 +1,7 @@
 import { QuestionInMemoryRepository } from '@/enterprise/repositories/question/in-memory/question-in-memory.reposritory'
 
 import { UniqueEntityUUID } from '@/shared/enterprise/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
-import { questionCreateMake } from '../question-create/question-create.make'
+import { questionMake } from '../make/question.make'
 import { QuestionUpdate } from './question-update'
 
 let questionRepository: QuestionInMemoryRepository
@@ -12,7 +12,7 @@ describe('QuestionUpdate', () => {
     sut = new QuestionUpdate(questionRepository)
   })
   it('should be able to update question', async () => {
-    const newQuestion = questionCreateMake(
+    const newQuestion = questionMake(
       { authorId: new UniqueEntityUUID('author-1') },
       new UniqueEntityUUID('question-1'),
     )
@@ -32,7 +32,7 @@ describe('QuestionUpdate', () => {
     })
   })
   it('should not be able to update question from author user', async () => {
-    const newQuestion = questionCreateMake(
+    const newQuestion = questionMake(
       { authorId: new UniqueEntityUUID('author-1') },
       new UniqueEntityUUID('question-1'),
     )

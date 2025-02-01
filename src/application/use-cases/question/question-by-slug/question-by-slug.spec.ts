@@ -1,6 +1,6 @@
 import { QuestionInMemoryRepository } from '@/enterprise/repositories/question/in-memory/question-in-memory.reposritory'
 
-import { questionCreateMake } from '../question-create/question-create.make'
+import { questionMake } from '../make/question.make'
 import { QuestionBySlug } from './question-by-slug'
 import { Slug } from '@/shared/enterprise/entities/value-objects/slug/slug'
 
@@ -12,7 +12,7 @@ describe('QuestionBySlug', () => {
     sut = new QuestionBySlug(questionRepository)
   })
   it('should be able to questio by slug', async () => {
-    const newQuestion = questionCreateMake({
+    const newQuestion = questionMake({
       slug: Slug.create('example-question'),
     })
 
