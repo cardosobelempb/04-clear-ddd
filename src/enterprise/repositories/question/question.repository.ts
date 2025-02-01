@@ -1,9 +1,6 @@
 import { QuestionEntity } from '@/enterprise/entities/question.entity'
+import { RepositoryAbstract } from '@/shared/enterprise/repository/repository.abstract'
 
-export abstract class QuestionRepository {
-  abstract findById(id: string): Promise<QuestionEntity | null>
+export abstract class QuestionRepository extends RepositoryAbstract<QuestionEntity> {
   abstract findBySlug(slug: string): Promise<QuestionEntity | null>
-  abstract create(entity: QuestionEntity): Promise<void>
-  abstract update(entity: QuestionEntity): Promise<void>
-  abstract delete(entity: QuestionEntity): Promise<void>
 }
