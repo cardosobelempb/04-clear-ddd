@@ -17,6 +17,11 @@ export class AnswerInMemoryRepository implements AnswerRepository {
     this.items.push(entity)
   }
 
+  async update(entity: AnswerEntity): Promise<void> {
+    const itemIndex = this.items.findIndex((item) => item.id === entity.id)
+    this.items[itemIndex] = entity
+  }
+
   async delete(entity: AnswerEntity): Promise<void> {
     const itemIndex = this.items.findIndex((item) => item.id === entity.id)
     this.items.splice(itemIndex, 1)
