@@ -5,6 +5,15 @@ import { QuestionRepository } from '@/enterprise/repositories/question/question.
 export class QuestionInMemoryRepository implements QuestionRepository {
   public items: QuestionEntity[] = []
 
+  async findById(id: string): Promise<QuestionEntity | null> {
+    const question = this.items.find((item) => item.id.toString() === id)
+    if (!question) {
+      return null
+    }
+
+    return question
+  }
+
   async findBySlug(slug: string): Promise<QuestionEntity | null> {
     const question = this.items.find((item) => item.slug.value === slug)
     if (!question) {
@@ -15,5 +24,12 @@ export class QuestionInMemoryRepository implements QuestionRepository {
 
   async create(entity: QuestionEntity): Promise<void> {
     this.items.push(entity)
+  }
+
+  async delete(entity: QuestionEntity): Promise<void> {
+    const itemIndex = await this.items.findIndex(
+      (item) => item.id === entity.id,
+    )
+    this.items.splice(itemIndex, 1)
   }
 }
