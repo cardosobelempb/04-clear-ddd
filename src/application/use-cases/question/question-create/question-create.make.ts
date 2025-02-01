@@ -2,19 +2,22 @@ import {
   QuestionEntity,
   QuestionProps,
 } from '@/enterprise/entities/question.entity'
-import { Slug } from '@/shared/enterprise/entities/value-objects/slug/slug'
 import { UniqueEntityUUID } from '@/shared/enterprise/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
+import { faker } from '@faker-js/faker'
 
 export function questionCreateMake(
   override: Partial<QuestionProps.Props> = {},
+  id?: UniqueEntityUUID,
 ) {
-  const question = QuestionEntity.create({
-    authorId: new UniqueEntityUUID(),
-    title: 'Example content',
-    slug: Slug.create('example-question'),
-    content: 'Example content',
-    ...override,
-  })
+  const question = QuestionEntity.create(
+    {
+      authorId: new UniqueEntityUUID(),
+      title: faker.lorem.sentence(),
+      content: faker.lorem.text(),
+      ...override,
+    },
+    id,
+  )
 
   return question
 }

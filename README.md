@@ -14,3 +14,4 @@
 - npm i vite-tsconfig-paths -D
 - npm i eslint @rocketseat/eslint-config -D
 - npm i eslint-plugin-vitest-globals@latest -D
+- npm i @faker-js/faker -D
