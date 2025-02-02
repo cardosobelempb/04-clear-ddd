@@ -57,12 +57,12 @@ export class QuestionEntity extends Entity<QuestionProps.Props> {
     return this.props.slug
   }
 
-  get updatedAt() {
+  get createdAt() {
     return this.props.createdAt
   }
 
-  get updatedAto() {
-    return this.props.createdAt
+  get updatedAt() {
+    return this.props.updatedAt
   }
 
   get isNew(): boolean {
