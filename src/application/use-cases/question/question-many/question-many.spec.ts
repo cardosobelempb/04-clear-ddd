@@ -1,21 +1,21 @@
 import { QuestionInMemoryRepository } from '@/enterprise/repositories/question/in-memory/question-in-memory.reposritory'
 
 import { questionMake } from '../make/question.make'
-import { QuestionManyRecent } from './question-many-recent'
+import { QuestionMany } from './question-many'
 
 let questionRepository: QuestionInMemoryRepository
-let sut: QuestionManyRecent
-describe('QuestionManyRecent', () => {
+let sut: QuestionMany
+describe('QuestionMany', () => {
   beforeAll(() => {
     questionRepository = new QuestionInMemoryRepository()
-    sut = new QuestionManyRecent(questionRepository)
+    sut = new QuestionMany(questionRepository)
   })
 
   afterEach(() => {
     questionRepository.items = []
   })
 
-  it('should be able to many recent questions', async () => {
+  it('should be able to many questions', async () => {
     await questionRepository.create(
       questionMake({ createdAt: new Date(2025, 0, 20) }),
     )
@@ -45,7 +45,6 @@ describe('QuestionManyRecent', () => {
     const { questions } = await sut.execute({
       page: 2,
     })
-    console.log(questions.length)
 
     expect(questions).toHaveLength(2)
   })

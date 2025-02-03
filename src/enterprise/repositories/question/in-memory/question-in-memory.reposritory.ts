@@ -22,7 +22,7 @@ export class QuestionInMemoryRepository implements QuestionRepository {
     return question
   }
 
-  async findManyRecent({ page }: Pagination.Params): Promise<QuestionEntity[]> {
+  async findMany({ page }: Pagination.Params): Promise<QuestionEntity[]> {
     const questions = this.items
       .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
       .slice((page - 1) * 20, page * 20)

@@ -11,13 +11,13 @@ export namespace QuestionManyRecent {
   }
 }
 
-export class QuestionManyRecent {
+export class QuestionMany {
   constructor(private readonly questionRepository: QuestionRepository) {}
 
   async execute({
     page,
   }: QuestionManyRecent.Request): Promise<QuestionManyRecent.Response> {
-    const questions = await this.questionRepository.findManyRecent({ page })
+    const questions = await this.questionRepository.findMany({ page })
 
     return { questions }
   }

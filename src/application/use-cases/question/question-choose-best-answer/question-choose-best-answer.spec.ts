@@ -1,19 +1,19 @@
 import { QuestionInMemoryRepository } from '@/enterprise/repositories/question/in-memory/question-in-memory.reposritory'
 
-import { UniqueEntityUUID } from '@/shared/enterprise/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
-import { questionMake } from '../make/question.make'
-import { ChooseBestAnswer } from './choose-best-answer'
 import { AnswerInMemoryRepository } from '@/enterprise/repositories/answer/in-memory/answer-in-memory.reposritory'
+import { UniqueEntityUUID } from '@/shared/enterprise/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
 import { answerMake } from '../../answer/make/answer.make'
+import { questionMake } from '../make/question.make'
+import { QuestionChooseBestAnswer } from './question-choose-best-answer'
 
 let answerRepository: AnswerInMemoryRepository
 let questionRepository: QuestionInMemoryRepository
-let sut: ChooseBestAnswer
+let sut: QuestionChooseBestAnswer
 describe('ChooseBestAnswer', () => {
   beforeAll(() => {
     questionRepository = new QuestionInMemoryRepository()
     answerRepository = new AnswerInMemoryRepository()
-    sut = new ChooseBestAnswer(answerRepository, questionRepository)
+    sut = new QuestionChooseBestAnswer(answerRepository, questionRepository)
   })
   it('should be able to choose the question best answer', async () => {
     const question = questionMake()

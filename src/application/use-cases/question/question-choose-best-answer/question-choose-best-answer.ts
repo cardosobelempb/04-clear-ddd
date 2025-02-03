@@ -2,7 +2,7 @@ import { QuestionEntity } from '@/enterprise/entities/question.entity'
 import { AnswerRepository } from '@/enterprise/repositories/answer/answer.repository'
 import { QuestionRepository } from '@/enterprise/repositories/question/question.repository'
 
-export namespace ChooseBestAnswer {
+export namespace QuestionChooseBestAnswer {
   export interface Request {
     authorId: string
     answerId: string
@@ -13,7 +13,7 @@ export namespace ChooseBestAnswer {
   }
 }
 
-export class ChooseBestAnswer {
+export class QuestionChooseBestAnswer {
   constructor(
     private readonly answerRepository: AnswerRepository,
     private readonly questionRepository: QuestionRepository,
@@ -22,7 +22,7 @@ export class ChooseBestAnswer {
   async execute({
     authorId,
     answerId,
-  }: ChooseBestAnswer.Request): Promise<ChooseBestAnswer.Response> {
+  }: QuestionChooseBestAnswer.Request): Promise<QuestionChooseBestAnswer.Response> {
     const answer = await this.answerRepository.findById(answerId)
 
     if (!answer) {
