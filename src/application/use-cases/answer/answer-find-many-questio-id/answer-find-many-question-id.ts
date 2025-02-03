@@ -1,8 +1,9 @@
 import { AnswerEntity } from '@/enterprise/entities/answer.entity'
 import { AnswerRepository } from '@/enterprise/repositories/answer/answer.repository'
 
-export namespace AnswerMany {
+namespace Props {
   export interface Request {
+    questioId: string
     page: number
   }
 
@@ -11,11 +12,13 @@ export namespace AnswerMany {
   }
 }
 
-export class AnswerMany {
+export class AnswerFindManyQuestionId {
   constructor(private readonly answerRepository: AnswerRepository) {}
 
-  async execute({ page }: AnswerMany.Request): Promise<AnswerMany.Response> {
-    const answers = await this.answerRepository.findMany({ page })
+  async execute({ questioId, page }: Props.Request): Promise<Props.Response> {
+    const answers = await this.answerRepository.findManyQuestionId(questioId, {
+      page,
+    })
 
     return { answers }
   }

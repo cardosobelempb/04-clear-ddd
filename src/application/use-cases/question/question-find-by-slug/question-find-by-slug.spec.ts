@@ -1,8 +1,8 @@
 import { QuestionInMemoryRepository } from '@/enterprise/repositories/question/in-memory/question-in-memory.reposritory'
+import { Slug } from '@/shared/enterprise/entities/value-objects/slug/slug'
 
 import { questionMake } from '../make/question.make'
-import { QuestionBySlug } from './question-by-slug'
-import { Slug } from '@/shared/enterprise/entities/value-objects/slug/slug'
+import { QuestionBySlug } from './question-find-by-slug'
 
 let questionRepository: QuestionInMemoryRepository
 let sut: QuestionBySlug

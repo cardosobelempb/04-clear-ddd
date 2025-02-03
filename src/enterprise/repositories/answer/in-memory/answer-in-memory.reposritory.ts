@@ -1,6 +1,6 @@
 import { AnswerEntity } from '@/enterprise/entities/answer.entity'
 import { AnswerRepository } from '@/enterprise/repositories/answer/answer.repository'
-import { Pagination } from '@/shared/enterprise/repository/pagination'
+import { Pagination } from '@/shared/enterprise/repository/types/pagination'
 
 export class AnswerInMemoryRepository implements AnswerRepository {
   public items: AnswerEntity[] = []
@@ -17,6 +17,17 @@ export class AnswerInMemoryRepository implements AnswerRepository {
   async findMany({ page }: Pagination.Params): Promise<AnswerEntity[]> {
     const answers = this.items
       .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+      .slice((page - 1) * 20, page * 20)
+
+    return answers
+  }
+
+  async findManyQuestionId(
+    questioId: string,
+    { page }: Pagination.Params,
+  ): Promise<AnswerEntity[]> {
+    const answers = this.items
+      .filter((item) => item.questionId.toString() === questioId)
       .slice((page - 1) * 20, page * 20)
 
     return answers

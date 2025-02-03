@@ -1,14 +1,14 @@
 import { AnswerInMemoryRepository } from '@/enterprise/repositories/answer/in-memory/answer-in-memory.reposritory'
 
 import { answerMake } from '../make/answer.make'
-import { AnswerMany } from './answer-many'
+import { AnswerFindMany } from './answer-find-many'
 
 let answerRepository: AnswerInMemoryRepository
-let sut: AnswerMany
+let sut: AnswerFindMany
 describe('AnswerMany', () => {
   beforeAll(() => {
     answerRepository = new AnswerInMemoryRepository()
-    sut = new AnswerMany(answerRepository)
+    sut = new AnswerFindMany(answerRepository)
   })
 
   afterEach(() => {
