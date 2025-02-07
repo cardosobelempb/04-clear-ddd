@@ -1,44 +1,20 @@
-import { Entity } from '@/shared/enterprise/entities/entity'
 import { UniqueEntityUUID } from '@/shared/enterprise/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
 import { Optional } from '@/shared/enterprise/types/optional'
 
+import { CommentEntity, CommentProps } from './comment.entity'
+
 export namespace AnswerCommentProps {
-  export interface Props {
-    authorId: UniqueEntityUUID
+  export interface Props extends CommentProps.Props {
     answerId: UniqueEntityUUID
-    content: string
-    createdAt: Date
-    updatedAt?: Date
   }
   export interface Id {
     answerCommentId: string
   }
 }
 
-export class AnswerCommentEntity extends Entity<AnswerCommentProps.Props> {
-  get authorId() {
-    return this.props.authorId
-  }
-
-  get content() {
-    return this.props.content
-  }
-
-  set content(content: string) {
-    this.props.content = content
-    this.touch()
-  }
-
-  get createdAt() {
-    return this.props.createdAt
-  }
-
-  get updatedAt() {
-    return this.props.updatedAt
-  }
-
-  private touch() {
-    this.props.updatedAt = new Date()
+export class AnswerCommentEntity extends CommentEntity<AnswerCommentProps.Props> {
+  get answerId() {
+    return this.props.answerId
   }
 
   static create(
