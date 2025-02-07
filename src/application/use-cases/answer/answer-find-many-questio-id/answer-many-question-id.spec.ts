@@ -2,14 +2,14 @@ import { AnswerInMemoryRepository } from '@/enterprise/repositories/answer/in-me
 import { UniqueEntityUUID } from '@/shared/enterprise/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
 
 import { answerMake } from '../make/answer.make'
-import { AnswerFindManyQuestionId } from './answer-find-many-question-id'
+import { AnswerManyQuestionId } from './answer-many-question-id'
 
 let answerRepository: AnswerInMemoryRepository
-let sut: AnswerFindManyQuestionId
+let sut: AnswerManyQuestionId
 describe('AnswerFindManyQuestionId', () => {
   beforeAll(() => {
     answerRepository = new AnswerInMemoryRepository()
-    sut = new AnswerFindManyQuestionId(answerRepository)
+    sut = new AnswerManyQuestionId(answerRepository)
   })
 
   afterEach(() => {
