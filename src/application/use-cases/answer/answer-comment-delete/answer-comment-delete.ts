@@ -1,5 +1,5 @@
 import { AnswerCommentRepository } from '@/enterprise/repositories/answer/answer-comment.repository'
-import { Either, left, right } from '@/shared/either'
+import { Either, left, right } from '@/shared/handle-erros/either'
 
 export namespace AnswerCommentDelete {
   export interface Request {
