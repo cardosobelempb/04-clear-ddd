@@ -1,7 +1,7 @@
 import { QuestionInMemoryRepository } from '@/enterprise/repositories/question/in-memory/question-in-memory.reposritory'
 
 import { UniqueEntityUUID } from '@/shared/enterprise/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
-import { questionMake } from '../make/question.make'
+import { questionMake } from '../factories/question.make'
 import { QuestionDelete } from './question-delete'
 
 let questionRepository: QuestionInMemoryRepository

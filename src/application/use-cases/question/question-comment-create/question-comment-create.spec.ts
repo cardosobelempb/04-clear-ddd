@@ -1,7 +1,7 @@
 import { QuestionInMemoryRepository } from '@/enterprise/repositories/question/in-memory/question-in-memory.reposritory'
 import { QuestionCommentCreate } from './question-comment-create'
 import { QuestionCommentInMemoryRepository } from '@/enterprise/repositories/question/in-memory/question-comment-in-memory.reposritory'
-import { questionMake } from '../make/question.make'
+import { questionMake } from '../factories/question.make'
 
 let questionRepository: QuestionInMemoryRepository
 let questionCommentRepository: QuestionCommentInMemoryRepository

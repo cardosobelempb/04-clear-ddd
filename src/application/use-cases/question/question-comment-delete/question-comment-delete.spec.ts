@@ -1,6 +1,6 @@
 import { QuestionCommentInMemoryRepository } from '@/enterprise/repositories/question/in-memory/question-comment-in-memory.reposritory'
 import { UniqueEntityUUID } from '@/shared/enterprise/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
-import { questionCommentMake } from '../make/question-commnet.make'
+import { questionCommentMake } from '../factories/question-commnet.make'
 import { QuestionCommentDelete } from './question-comment-delete'
 
 let questionCommentRepository: QuestionCommentInMemoryRepository

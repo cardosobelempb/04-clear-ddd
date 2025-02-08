@@ -1,6 +1,6 @@
 import { QuestionInMemoryRepository } from '@/enterprise/repositories/question/in-memory/question-in-memory.reposritory'
 
-import { questionMake } from '../make/question.make'
+import { questionMake } from '../factories/question.make'
 import { QuestionFindMany } from './question-find-many'
 
 let questionRepository: QuestionInMemoryRepository
