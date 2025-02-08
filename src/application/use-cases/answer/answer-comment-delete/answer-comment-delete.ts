@@ -1,4 +1,5 @@
 import { AnswerCommentRepository } from '@/enterprise/repositories/answer/answer-comment.repository'
+import { Either, left, right } from '@/shared/either'
 
 export namespace AnswerCommentDelete {
   export interface Request {
@@ -6,7 +7,7 @@ export namespace AnswerCommentDelete {
     answerCommentId: string
   }
 
-  export interface Response {}
+  export type Response = Either<string, object>
 }
 
 export class AnswerCommentDelete {
@@ -22,14 +23,14 @@ export class AnswerCommentDelete {
       await this.answerCommentRepository.findById(answerCommentId)
 
     if (!answerComment) {
-      throw new Error('Answer comment not found')
+      return left('Answer comment not found')
     }
 
     if (answerComment.authorId.toString() !== authorId) {
-      throw new Error('Not alowed')
+      return left('Not alowed')
     }
 
     await this.answerCommentRepository.delete(answerComment)
-    return {}
+    return right({})
   }
 }
