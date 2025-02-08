@@ -24,6 +24,17 @@ export class AnswerCommentInMemoryRepository
     return answers
   }
 
+  async answerComments(
+    answerId: string,
+    { page }: Pagination.Params,
+  ): Promise<AnswerCommentEntity[]> {
+    const answers = this.items
+      .filter((item) => item.answerId.toString() === answerId)
+      .slice((page - 1) * 20, page * 20)
+
+    return answers
+  }
+
   async create(entity: AnswerCommentEntity): Promise<void> {
     this.items.push(entity)
   }
