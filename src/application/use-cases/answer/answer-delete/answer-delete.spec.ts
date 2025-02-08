@@ -1,7 +1,7 @@
 import { AnswerInMemoryRepository } from '@/enterprise/repositories/answer/in-memory/answer-in-memory.reposritory'
 import { UniqueEntityUUID } from '@/shared/enterprise/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
 import { AnswerDelete } from './answer-delete'
-import { answerMake } from '../make/answer.make'
+import { answerMake } from '../factories/answer.make'
 
 let answerRepository: AnswerInMemoryRepository
 let sut: AnswerDelete

@@ -1,7 +1,7 @@
 import { AnswerInMemoryRepository } from '@/enterprise/repositories/answer/in-memory/answer-in-memory.reposritory'
 import { AnswerCommentCreate } from './answer-comment-create'
 import { AnswerCommentInMemoryRepository } from '@/enterprise/repositories/answer/in-memory/answer-comment-in-memory.reposritory'
-import { answerMake } from '../make/answer.make'
+import { answerMake } from '../factories/answer.make'
 
 let answerRepository: AnswerInMemoryRepository
 let answerCommentRepository: AnswerCommentInMemoryRepository

@@ -2,7 +2,7 @@ import { QuestionInMemoryRepository } from '@/enterprise/repositories/question/i
 
 import { AnswerInMemoryRepository } from '@/enterprise/repositories/answer/in-memory/answer-in-memory.reposritory'
 import { UniqueEntityUUID } from '@/shared/enterprise/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
-import { answerMake } from '../../answer/make/answer.make'
+import { answerMake } from '../../answer/factories/answer.make'
 import { questionMake } from '../make/question.make'
 import { QuestionChooseBestAnswer } from './question-choose-best-answer'
 

@@ -1,7 +1,7 @@
 import { AnswerInMemoryRepository } from '@/enterprise/repositories/answer/in-memory/answer-in-memory.reposritory'
 import { UniqueEntityUUID } from '@/shared/enterprise/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
 
-import { answerMake } from '../make/answer.make'
+import { answerMake } from '../factories/answer.make'
 import { AnswerManyQuestionId } from './answer-many-question-id'
 
 let answerRepository: AnswerInMemoryRepository

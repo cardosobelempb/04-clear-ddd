@@ -2,7 +2,7 @@ import { AnswerInMemoryRepository } from '@/enterprise/repositories/answer/in-me
 
 import { UniqueEntityUUID } from '@/shared/enterprise/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
 import { AnswerUpdate } from './answer-update'
-import { answerMake } from '../make/answer.make'
+import { answerMake } from '../factories/answer.make'
 
 let answerRepository: AnswerInMemoryRepository
 let sut: AnswerUpdate

@@ -1,6 +1,6 @@
 import { AnswerInMemoryRepository } from '@/enterprise/repositories/answer/in-memory/answer-in-memory.reposritory'
 
-import { answerMake } from '../make/answer.make'
+import { answerMake } from '../factories/answer.make'
 import { AnswerFindMany } from './answer-find-many'
 
 let answerRepository: AnswerInMemoryRepository
