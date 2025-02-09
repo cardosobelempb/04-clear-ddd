@@ -1,4 +1,6 @@
 import { AnswerCommentRepository } from '@/enterprise/repositories/answer/answer-comment.repository'
+import { NotAllowedErro } from '@/shared/application/service-erros/not-allowed.erro'
+import { ResourceNotFoundErro } from '@/shared/application/service-erros/resource-not-found.error'
 import { Either, left, right } from '@/shared/handle-erros/either'
 
 export namespace AnswerCommentDelete {
@@ -7,7 +9,7 @@ export namespace AnswerCommentDelete {
     answerCommentId: string
   }
 
-  export type Response = Either<string, object>
+  export type Response = Either<ResourceNotFoundErro | NotAllowedErro, object>
 }
 
 export class AnswerCommentDelete {
@@ -23,11 +25,11 @@ export class AnswerCommentDelete {
       await this.answerCommentRepository.findById(answerCommentId)
 
     if (!answerComment) {
-      return left('Answer comment not found')
+      return left(new ResourceNotFoundErro())
     }
 
     if (answerComment.authorId.toString() !== authorId) {
-      return left('Not alowed')
+      return left(new NotAllowedErro())
     }
 
     await this.answerCommentRepository.delete(answerComment)
