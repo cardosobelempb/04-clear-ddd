@@ -1,14 +1,18 @@
 import { QuestionEntity } from '@/enterprise/entities/question.entity'
 import { QuestionRepository } from '@/enterprise/repositories/question/question.repository'
+import { Either, right } from '@/shared/handle-erros/either'
 
 export namespace Props {
   export interface Request {
     page: number
   }
 
-  export interface Response {
-    questions: QuestionEntity[]
-  }
+  export type Response = Either<
+    null,
+    {
+      questions: QuestionEntity[]
+    }
+  >
 }
 
 export class QuestionFindMany {
@@ -17,6 +21,6 @@ export class QuestionFindMany {
   async execute({ page }: Props.Request): Promise<Props.Response> {
     const questions = await this.questionRepository.findMany({ page })
 
-    return { questions }
+    return right({ questions })
   }
 }

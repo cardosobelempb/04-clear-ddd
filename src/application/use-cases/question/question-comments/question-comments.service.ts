@@ -1,5 +1,6 @@
 import { QuestionCommentEntity } from '@/enterprise/entities/question-comment.entity'
 import { QuestionCommentRepository } from '@/enterprise/repositories/question/question-comment.repository'
+import { Either, right } from '@/shared/handle-erros/either'
 
 export namespace QuestionCommentsService {
   export interface Request {
@@ -7,9 +8,12 @@ export namespace QuestionCommentsService {
     page: number
   }
 
-  export interface Response {
-    questionComments: QuestionCommentEntity[]
-  }
+  export type Response = Either<
+    null,
+    {
+      questionComments: QuestionCommentEntity[]
+    }
+  >
 }
 
 export class QuestionCommentsService {
@@ -26,6 +30,6 @@ export class QuestionCommentsService {
         page,
       })
 
-    return { questionComments }
+    return right({ questionComments })
   }
 }

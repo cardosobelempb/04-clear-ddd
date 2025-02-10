@@ -1,4 +1,7 @@
 import { QuestionRepository } from '@/enterprise/repositories/question/question.repository'
+import { NotAllowedErro } from '@/shared/application/service-erros/not-allowed.erro'
+import { ResourceNotFoundErro } from '@/shared/application/service-erros/resource-not-found.error'
+import { Either, left, right } from '@/shared/handle-erros/either'
 
 export namespace QuestionDelete {
   export interface Request {
@@ -6,7 +9,7 @@ export namespace QuestionDelete {
     questionId: string
   }
 
-  export interface Response {}
+  export type Response = Either<ResourceNotFoundErro | NotAllowedErro, object>
 }
 
 export class QuestionDelete {
@@ -18,12 +21,12 @@ export class QuestionDelete {
   }: QuestionDelete.Request): Promise<QuestionDelete.Response> {
     const question = await this.questionRepository.findById(questionId)
     if (!question) {
-      throw new Error('Question not found.')
+      return left(new ResourceNotFoundErro())
     }
     if (authorId !== question.authorId.toString()) {
-      throw new Error('Not alowed')
+      return left(new NotAllowedErro())
     }
     await this.questionRepository.delete(question)
-    return {}
+    return right({})
   }
 }

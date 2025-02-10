@@ -1,6 +1,9 @@
 import { QuestionEntity } from '@/enterprise/entities/question.entity'
 import { AnswerRepository } from '@/enterprise/repositories/answer/answer.repository'
 import { QuestionRepository } from '@/enterprise/repositories/question/question.repository'
+import { NotAllowedErro } from '@/shared/application/service-erros/not-allowed.erro'
+import { ResourceNotFoundErro } from '@/shared/application/service-erros/resource-not-found.error'
+import { Either, left, right } from '@/shared/handle-erros/either'
 
 export namespace QuestionChooseBestAnswer {
   export interface Request {
@@ -8,9 +11,12 @@ export namespace QuestionChooseBestAnswer {
     answerId: string
   }
 
-  export interface Response {
-    question: QuestionEntity
-  }
+  export type Response = Either<
+    ResourceNotFoundErro | NotAllowedErro,
+    {
+      question: QuestionEntity
+    }
+  >
 }
 
 export class QuestionChooseBestAnswer {
@@ -26,7 +32,7 @@ export class QuestionChooseBestAnswer {
     const answer = await this.answerRepository.findById(answerId)
 
     if (!answer) {
-      throw new Error('Answer not foound')
+      return left(new ResourceNotFoundErro())
     }
 
     const question = await this.questionRepository.findById(
@@ -34,19 +40,19 @@ export class QuestionChooseBestAnswer {
     )
 
     if (!question) {
-      throw new Error('Question not found.')
+      return left(new ResourceNotFoundErro())
     }
 
     if (authorId !== question.authorId.toString()) {
-      throw new Error('Not alowed')
+      return left(new NotAllowedErro())
     }
 
     question.bestAnswerId = answer.id
 
     await this.questionRepository.update(question)
 
-    return {
+    return right({
       question,
-    }
+    })
   }
 }

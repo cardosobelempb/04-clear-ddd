@@ -1,5 +1,6 @@
 import { AnswerEntity } from '@/enterprise/entities/answer.entity'
 import { AnswerRepository } from '@/enterprise/repositories/answer/answer.repository'
+import { Either, right } from '@/shared/handle-erros/either'
 
 namespace Props {
   export interface Request {
@@ -7,9 +8,12 @@ namespace Props {
     page: number
   }
 
-  export interface Response {
-    answers: AnswerEntity[]
-  }
+  export type Response = Either<
+    null,
+    {
+      answers: AnswerEntity[]
+    }
+  >
 }
 
 export class AnswerManyQuestionId {
@@ -20,6 +24,6 @@ export class AnswerManyQuestionId {
       page,
     })
 
-    return { answers }
+    return right({ answers })
   }
 }

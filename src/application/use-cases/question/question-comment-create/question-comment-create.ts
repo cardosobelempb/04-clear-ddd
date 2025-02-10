@@ -1,7 +1,9 @@
 import { QuestionCommentEntity } from '@/enterprise/entities/question-comment.entity'
 import { QuestionCommentRepository } from '@/enterprise/repositories/question/question-comment.repository'
 import { QuestionRepository } from '@/enterprise/repositories/question/question.repository'
+import { ResourceNotFoundErro } from '@/shared/application/service-erros/resource-not-found.error'
 import { UniqueEntityUUID } from '@/shared/enterprise/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
+import { Either, left, right } from '@/shared/handle-erros/either'
 
 export namespace QuestionCommentCreate {
   export interface Request {
@@ -10,9 +12,12 @@ export namespace QuestionCommentCreate {
     content: string
   }
 
-  export interface Response {
-    questionComment: QuestionCommentEntity
-  }
+  export type Response = Either<
+    ResourceNotFoundErro,
+    {
+      questionComment: QuestionCommentEntity
+    }
+  >
 }
 
 export class QuestionCommentCreate {
@@ -29,7 +34,7 @@ export class QuestionCommentCreate {
     const question = await this.questionRepository.findById(questionId)
 
     if (!question) {
-      throw new Error('Question not foound')
+      return left(new ResourceNotFoundErro())
     }
 
     const questionComment = QuestionCommentEntity.create({
@@ -39,6 +44,6 @@ export class QuestionCommentCreate {
     })
 
     await this.questionCommentRepository.create(questionComment)
-    return { questionComment }
+    return right({ questionComment })
   }
 }

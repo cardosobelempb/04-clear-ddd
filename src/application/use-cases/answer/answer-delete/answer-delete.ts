@@ -1,4 +1,7 @@
 import { AnswerRepository } from '@/enterprise/repositories/answer/answer.repository'
+import { NotAllowedErro } from '@/shared/application/service-erros/not-allowed.erro'
+import { ResourceNotFoundErro } from '@/shared/application/service-erros/resource-not-found.error'
+import { Either, left, right } from '@/shared/handle-erros/either'
 
 export namespace AnswerDelete {
   export interface Request {
@@ -6,7 +9,7 @@ export namespace AnswerDelete {
     answerId: string
   }
 
-  export interface Response {}
+  export type Response = Either<ResourceNotFoundErro | NotAllowedErro, object>
 }
 
 export class AnswerDelete {
@@ -18,12 +21,12 @@ export class AnswerDelete {
   }: AnswerDelete.Request): Promise<AnswerDelete.Response> {
     const answer = await this.answerRepository.findById(answerId)
     if (!answer) {
-      throw new Error('Answer not found.')
+      return left(new ResourceNotFoundErro())
     }
     if (authorId !== answer.authorId.toString()) {
-      throw new Error('Not alowed')
+      return left(new NotAllowedErro())
     }
     await this.answerRepository.delete(answer)
-    return {}
+    return right({})
   }
 }

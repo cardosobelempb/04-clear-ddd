@@ -1,4 +1,7 @@
 import { QuestionCommentRepository } from '@/enterprise/repositories/question/question-comment.repository'
+import { NotAllowedErro } from '@/shared/application/service-erros/not-allowed.erro'
+import { ResourceNotFoundErro } from '@/shared/application/service-erros/resource-not-found.error'
+import { Either, left, right } from '@/shared/handle-erros/either'
 
 export namespace QuestionCommentDelete {
   export interface Request {
@@ -6,7 +9,7 @@ export namespace QuestionCommentDelete {
     questionCommentId: string
   }
 
-  export interface Response {}
+  export type Response = Either<ResourceNotFoundErro | NotAllowedErro, object>
 }
 
 export class QuestionCommentDelete {
@@ -22,14 +25,14 @@ export class QuestionCommentDelete {
       await this.questionCommentRepository.findById(questionCommentId)
 
     if (!questionComment) {
-      throw new Error('QuestionComment not found.')
+      return left(new ResourceNotFoundErro())
     }
 
     if (questionComment.authorId.toString() !== authorId) {
-      throw new Error('Not alowed')
+      return left(new NotAllowedErro())
     }
 
     await this.questionCommentRepository.delete(questionComment)
-    return {}
+    return right({})
   }
 }

@@ -1,6 +1,7 @@
 import { AnswerEntity } from '@/enterprise/entities/answer.entity'
 import { AnswerRepository } from '@/enterprise/repositories/answer/answer.repository'
 import { UniqueEntityUUID } from '@/shared/enterprise/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
+import { Either, right } from '@/shared/handle-erros/either'
 
 export namespace AnswerQuestion {
   export interface Request {
@@ -9,9 +10,7 @@ export namespace AnswerQuestion {
     content: string
   }
 
-  export interface Response {
-    answer: AnswerEntity
-  }
+  export type Response = Either<null, { answer: AnswerEntity }>
 }
 
 export class AnswerQuestion {
@@ -29,6 +28,6 @@ export class AnswerQuestion {
     })
 
     await this.answerRepository.create(answer)
-    return { answer }
+    return right({ answer })
   }
 }

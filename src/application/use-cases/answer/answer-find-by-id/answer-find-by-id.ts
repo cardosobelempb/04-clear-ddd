@@ -1,14 +1,14 @@
 import { AnswerEntity } from '@/enterprise/entities/answer.entity'
 import { AnswerRepository } from '@/enterprise/repositories/answer/answer.repository'
+import { ResourceNotFoundErro } from '@/shared/application/service-erros/resource-not-found.error'
+import { Either, left, right } from '@/shared/handle-erros/either'
 
 export namespace AnswerById {
   export interface Request {
     answerId: string
   }
 
-  export interface Response {
-    answer: AnswerEntity
-  }
+  export type Response = Either<ResourceNotFoundErro, { answer: AnswerEntity }>
 }
 
 export class AnswerById {
@@ -19,8 +19,8 @@ export class AnswerById {
   }: AnswerById.Request): Promise<AnswerById.Response> {
     const answer = await this.answerRepository.findById(answerId)
     if (!answer) {
-      throw new Error('Answer not found.')
+      return left(new ResourceNotFoundErro())
     }
-    return { answer }
+    return right({ answer })
   }
 }

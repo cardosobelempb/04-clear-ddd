@@ -1,14 +1,19 @@
 import { QuestionEntity } from '@/enterprise/entities/question.entity'
 import { QuestionRepository } from '@/enterprise/repositories/question/question.repository'
+import { ResourceNotFoundErro } from '@/shared/application/service-erros/resource-not-found.error'
+import { Either, left, right } from '@/shared/handle-erros/either'
 
 export namespace QuestionBySlug {
   export interface Request {
     slug: string
   }
 
-  export interface Response {
-    question: QuestionEntity
-  }
+  export type Response = Either<
+    ResourceNotFoundErro,
+    {
+      question: QuestionEntity
+    }
+  >
 }
 
 export class QuestionBySlug {
@@ -19,8 +24,8 @@ export class QuestionBySlug {
   }: QuestionBySlug.Request): Promise<QuestionBySlug.Response> {
     const question = await this.questionRepository.findBySlug(slug)
     if (!question) {
-      throw new Error('Question not found.')
+      return left(new ResourceNotFoundErro())
     }
-    return { question }
+    return right({ question })
   }
 }

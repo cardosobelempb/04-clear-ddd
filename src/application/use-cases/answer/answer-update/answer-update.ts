@@ -1,5 +1,8 @@
 import { AnswerEntity } from '@/enterprise/entities/answer.entity'
 import { AnswerRepository } from '@/enterprise/repositories/answer/answer.repository'
+import { NotAllowedErro } from '@/shared/application/service-erros/not-allowed.erro'
+import { ResourceNotFoundErro } from '@/shared/application/service-erros/resource-not-found.error'
+import { Either, left, right } from '@/shared/handle-erros/either'
 
 export namespace AnswerUpdate {
   export interface Request {
@@ -8,9 +11,12 @@ export namespace AnswerUpdate {
     content: string
   }
 
-  export interface Response {
-    answer: AnswerEntity
-  }
+  export type Response = Either<
+    ResourceNotFoundErro | NotAllowedErro,
+    {
+      answer: AnswerEntity
+    }
+  >
 }
 
 export class AnswerUpdate {
@@ -24,19 +30,19 @@ export class AnswerUpdate {
     const answer = await this.answerRepository.findById(answerId)
 
     if (!answer) {
-      throw new Error('Answer not found.')
+      return left(new ResourceNotFoundErro())
     }
 
     if (authorId !== answer.authorId.toString()) {
-      throw new Error('Not alowed')
+      return left(new NotAllowedErro())
     }
 
     answer.content = content
 
     await this.answerRepository.update(answer)
 
-    return {
+    return right({
       answer,
-    }
+    })
   }
 }
