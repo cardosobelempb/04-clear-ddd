@@ -22,8 +22,8 @@ export namespace QuestionCommentCreate {
 
 export class QuestionCommentCreate {
   constructor(
-    private readonly questionCommentRepository: QuestionCommentRepository,
     private readonly questionRepository: QuestionRepository,
+    private readonly questionCommentRepository: QuestionCommentRepository,
   ) {}
 
   async execute({

@@ -1,6 +1,7 @@
 import { QuestionInMemoryRepository } from '@/enterprise/repositories/question/in-memory/question-in-memory.reposritory'
 
 import { AnswerInMemoryRepository } from '@/enterprise/repositories/answer/in-memory/answer-in-memory.reposritory'
+import { NotAllowedErro } from '@/shared/application/service-erros/not-allowed.erro'
 import { UniqueEntityUUID } from '@/shared/enterprise/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
 import { answerMake } from '../../answer/factories/answer.make'
 import { questionMake } from '../factories/question.make'
@@ -44,11 +45,12 @@ describe('ChooseBestAnswer', () => {
     await questionRepository.create(question)
     await answerRepository.create(answer)
 
-    await expect(() => {
-      return sut.execute({
-        answerId: answer.id.toString(),
-        authorId: 'author-2',
-      })
-    }).rejects.toBeInstanceOf(Error)
+    const result = await sut.execute({
+      answerId: answer.id.toString(),
+      authorId: 'author-2',
+    })
+
+    expect(result.isLeft()).toBe(true)
+    expect(result.value).toBeInstanceOf(NotAllowedErro)
   })
 })

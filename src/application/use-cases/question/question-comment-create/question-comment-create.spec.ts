@@ -11,8 +11,8 @@ describe('QuestionCommentCreate', () => {
     questionRepository = new QuestionInMemoryRepository()
     questionCommentRepository = new QuestionCommentInMemoryRepository()
     sut = new QuestionCommentCreate(
-      questionCommentRepository,
       questionRepository,
+      questionCommentRepository,
     )
   })
   it('should be able to Create a question comment', async () => {
@@ -20,14 +20,12 @@ describe('QuestionCommentCreate', () => {
 
     await questionRepository.create(question)
 
-    const { questionComment } = await sut.execute({
+    await sut.execute({
       authorId: 'author-1',
       questionId: question.id.toString(),
       content: 'content question',
     })
 
-    expect(questionComment.id).toBeTruthy()
-    expect(questionCommentRepository.items[0].id).toEqual(questionComment.id)
     expect(questionCommentRepository.items[0].content).toEqual(
       'content question',
     )

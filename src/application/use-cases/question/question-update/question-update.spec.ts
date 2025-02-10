@@ -3,6 +3,7 @@ import { QuestionInMemoryRepository } from '@/enterprise/repositories/question/i
 import { UniqueEntityUUID } from '@/shared/enterprise/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
 import { questionMake } from '../factories/question.make'
 import { QuestionUpdate } from './question-update'
+import { NotAllowedErro } from '@/shared/application/service-erros/not-allowed.erro'
 
 let questionRepository: QuestionInMemoryRepository
 let sut: QuestionUpdate
@@ -39,13 +40,13 @@ describe('QuestionUpdate', () => {
 
     await questionRepository.create(newQuestion)
 
-    await expect(() => {
-      return sut.execute({
-        authorId: 'author-2',
-        questionId: 'question-1',
-        title: 'Title test',
-        content: 'Content test',
-      })
-    }).rejects.toBeInstanceOf(Error)
+    const result = await sut.execute({
+      authorId: 'author-2',
+      questionId: 'question-1',
+      title: 'Title test',
+      content: 'Content test',
+    })
+    expect(result.isLeft()).toBe(true)
+    expect(result.value).toBeInstanceOf(NotAllowedErro)
   })
 })

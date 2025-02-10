@@ -10,13 +10,13 @@ describe('Create answer', () => {
     answerQuestion = new AnswerQuestion(answerRepository)
   })
   test('shoukd be able to create an answer', async () => {
-    const { answer } = await answerQuestion.execute({
+    const result = await answerQuestion.execute({
       questionId: '1',
       authorId: '1',
       content: 'Conteúdo da resposta',
     })
 
-    expect(answer.id).toBeTruthy()
-    expect(answerRepository.items[0].id).toEqual(answer.id)
+    expect(result.isRight()).toBe(true)
+    expect(answerRepository.items[0]).toEqual(result.value?.answer)
   })
 })

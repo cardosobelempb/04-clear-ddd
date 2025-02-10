@@ -3,6 +3,7 @@ import { AnswerInMemoryRepository } from '@/enterprise/repositories/answer/in-me
 import { UniqueEntityUUID } from '@/shared/enterprise/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
 import { AnswerUpdate } from './answer-update'
 import { answerMake } from '../factories/answer.make'
+import { NotAllowedErro } from '@/shared/application/service-erros/not-allowed.erro'
 
 let answerRepository: AnswerInMemoryRepository
 let sut: AnswerUpdate
@@ -37,12 +38,12 @@ describe('AnswerUpdate', () => {
 
     await answerRepository.create(newAnswer)
 
-    await expect(() => {
-      return sut.execute({
-        authorId: 'author-2',
-        answerId: 'answer-1',
-        content: 'Content test',
-      })
-    }).rejects.toBeInstanceOf(Error)
+    const result = await sut.execute({
+      authorId: 'author-2',
+      answerId: 'answer-1',
+      content: 'Content test',
+    })
+    expect(result.isLeft()).toBe(true)
+    expect(result.value).toBeInstanceOf(NotAllowedErro)
   })
 })

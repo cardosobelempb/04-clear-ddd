@@ -1,5 +1,6 @@
 import { QuestionInMemoryRepository } from '@/enterprise/repositories/question/in-memory/question-in-memory.reposritory'
 
+import { ResourceNotFoundErro } from '@/shared/application/service-erros/resource-not-found.error'
 import { UniqueEntityUUID } from '@/shared/enterprise/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
 import { questionMake } from '../factories/question.make'
 import { QuestionDelete } from './question-delete'
@@ -34,11 +35,12 @@ describe('QuestionDelete', () => {
 
     await questionRepository.create(newQuestion)
 
-    await expect(() => {
-      return sut.execute({
-        authorId: 'author-1',
-        questionId: 'question-2',
-      })
-    }).rejects.toBeInstanceOf(Error)
+    const result = await sut.execute({
+      authorId: 'author-1',
+      questionId: 'question-2',
+    })
+
+    expect(result.isLeft()).toBe(true)
+    expect(result.value).toBeInstanceOf(ResourceNotFoundErro)
   })
 })

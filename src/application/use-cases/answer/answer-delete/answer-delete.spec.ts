@@ -2,6 +2,7 @@ import { AnswerInMemoryRepository } from '@/enterprise/repositories/answer/in-me
 import { UniqueEntityUUID } from '@/shared/enterprise/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
 import { AnswerDelete } from './answer-delete'
 import { answerMake } from '../factories/answer.make'
+import { ResourceNotFoundErro } from '@/shared/application/service-erros/resource-not-found.error'
 
 let answerRepository: AnswerInMemoryRepository
 let sut: AnswerDelete
@@ -33,11 +34,12 @@ describe('AnswerDelete', () => {
 
     await answerRepository.create(newAnswer)
 
-    await expect(() => {
-      return sut.execute({
-        authorId: 'author-1',
-        answerId: 'answer-2',
-      })
-    }).rejects.toBeInstanceOf(Error)
+    const result = await sut.execute({
+      authorId: 'author-1',
+      answerId: 'answer-2',
+    })
+
+    expect(result.isLeft()).toBe(true)
+    expect(result.value).toBeInstanceOf(ResourceNotFoundErro)
   })
 })

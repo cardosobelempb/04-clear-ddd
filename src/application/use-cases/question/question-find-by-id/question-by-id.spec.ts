@@ -16,11 +16,11 @@ describe('QuestionById', () => {
 
     await questionRepository.create(newQuestion)
 
-    const { question } = await sut.execute({
+    const result = await sut.execute({
       questionId: 'question-1',
     })
 
-    expect(question.id).toBeTruthy()
-    expect(question.id).toEqual(newQuestion.id)
+    expect(result.value.question.id).toBeTruthy()
+    expect(result.value.question.id).toEqual(newQuestion.id)
   })
 })

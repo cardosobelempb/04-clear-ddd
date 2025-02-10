@@ -26,11 +26,11 @@ describe('AnswerMany', () => {
       answerMake({ createdAt: new Date(2025, 0, 23) }),
     )
 
-    const { answers } = await sut.execute({
+    const result = await sut.execute({
       page: 1,
     })
 
-    expect(answers).toEqual([
+    expect(result.value?.answers).toEqual([
       expect.objectContaining({ createdAt: new Date(2025, 0, 23) }),
       expect.objectContaining({ createdAt: new Date(2025, 0, 20) }),
       expect.objectContaining({ createdAt: new Date(2025, 0, 18) }),
@@ -42,10 +42,10 @@ describe('AnswerMany', () => {
       await answerRepository.create(answerMake())
     }
 
-    const { answers } = await sut.execute({
+    const result = await sut.execute({
       page: 2,
     })
 
-    expect(answers).toHaveLength(2)
+    expect(result.value?.answers).toHaveLength(2)
   })
 })

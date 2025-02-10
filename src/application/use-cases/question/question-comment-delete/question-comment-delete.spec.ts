@@ -1,4 +1,5 @@
 import { QuestionCommentInMemoryRepository } from '@/enterprise/repositories/question/in-memory/question-comment-in-memory.reposritory'
+import { NotAllowedErro } from '@/shared/application/service-erros/not-allowed.erro'
 import { UniqueEntityUUID } from '@/shared/enterprise/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
 import { questionCommentMake } from '../factories/question-commnet.make'
 import { QuestionCommentDelete } from './question-comment-delete'
@@ -29,11 +30,12 @@ describe('QuestionCommentDelete', () => {
 
     await questionCommentRepository.create(questionComment)
 
-    await expect(() => {
-      return sut.execute({
-        authorId: 'author-2',
-        questionCommentId: questionComment.id.toString(),
-      })
-    }).rejects.toBeInstanceOf(Error)
+    const result = await sut.execute({
+      authorId: 'author-2',
+      questionCommentId: questionComment.id.toString(),
+    })
+
+    expect(result.isLeft()).toBe(true)
+    expect(result.value).toBeInstanceOf(NotAllowedErro)
   })
 })
