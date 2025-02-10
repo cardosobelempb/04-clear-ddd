@@ -23,9 +23,11 @@ export class QuestionBySlug {
     slug,
   }: QuestionBySlug.Request): Promise<QuestionBySlug.Response> {
     const question = await this.questionRepository.findBySlug(slug)
+
     if (!question) {
       return left(new ResourceNotFoundErro())
     }
+
     return right({ question })
   }
 }

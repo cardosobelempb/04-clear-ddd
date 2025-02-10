@@ -3,7 +3,6 @@ import { UniqueEntityUUID } from '@/shared/enterprise/entities/value-objects/uni
 
 import { answerMake } from '../factories/answer.make'
 import { AnswerById } from './answer-find-by-id'
-import { ResourceNotFoundErro } from '@/shared/application/service-erros/resource-not-found.error'
 
 let answerRepository: AnswerInMemoryRepository
 let sut: AnswerById

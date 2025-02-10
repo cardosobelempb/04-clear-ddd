@@ -18,6 +18,7 @@ export class AnswerById {
     answerId,
   }: AnswerById.Request): Promise<AnswerById.Response> {
     const answer = await this.answerRepository.findById(answerId)
+
     if (!answer) {
       return left(new ResourceNotFoundErro())
     }
