@@ -1,4 +1,4 @@
-import { Entity } from '@/shared/enterprise/entities/entity'
+import { AggregateRoo } from '@/shared/enterprise/entities/aggregate-rrot'
 import { Slug } from '@/shared/enterprise/entities/value-objects/slug/slug'
 import { UniqueEntityUUID } from '@/shared/enterprise/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
 import { Optional } from '@/shared/enterprise/types/optional'
@@ -20,7 +20,7 @@ export namespace QuestionProps {
   }
 }
 
-export class QuestionEntity extends Entity<QuestionProps.Props> {
+export class QuestionEntity extends AggregateRoo<QuestionProps.Props> {
   get authorId() {
     return this.props.authorId
   }
