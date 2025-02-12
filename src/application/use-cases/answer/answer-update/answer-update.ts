@@ -1,4 +1,4 @@
-import { AnswerEntity } from '@/enterprise/entities/answer.entity'
+import { AnswerEntity } from '@/enterprise/entities/answer/answer.entity'
 import { AnswerRepository } from '@/enterprise/repositories/answer/answer.repository'
 import { NotAllowedErro } from '@/shared/application/service-erros/not-allowed.erro'
 import { ResourceNotFoundErro } from '@/shared/application/service-erros/resource-not-found.error'

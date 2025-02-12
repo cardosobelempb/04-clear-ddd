@@ -1,4 +1,4 @@
-import { QuestionEntity } from '@/enterprise/entities/question.entity'
+import { QuestionEntity } from '@/enterprise/entities/question/question.entity'
 import { QuestionRepository } from '@/enterprise/repositories/question/question.repository'
 import { Either, right } from '@/shared/handle-erros/either'
 

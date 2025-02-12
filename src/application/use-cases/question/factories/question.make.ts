@@ -1,7 +1,7 @@
 import {
   QuestionEntity,
   QuestionProps,
-} from '@/enterprise/entities/question.entity'
+} from '@/enterprise/entities/question/question.entity'
 import { UniqueEntityUUID } from '@/shared/enterprise/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
 import { faker } from '@faker-js/faker'
 

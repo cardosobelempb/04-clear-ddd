@@ -1,4 +1,4 @@
-import { AnswerEntity } from '@/enterprise/entities/answer.entity'
+import { AnswerEntity } from '@/enterprise/entities/answer/answer.entity'
 import { RepositoryAbstract } from '@/shared/enterprise/repository/repository.abstract'
 import { Pagination } from '@/shared/enterprise/repository/types/pagination'
 

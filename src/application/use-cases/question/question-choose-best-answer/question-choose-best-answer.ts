@@ -1,4 +1,4 @@
-import { QuestionEntity } from '@/enterprise/entities/question.entity'
+import { QuestionEntity } from '@/enterprise/entities/question/question.entity'
 import { AnswerRepository } from '@/enterprise/repositories/answer/answer.repository'
 import { QuestionRepository } from '@/enterprise/repositories/question/question.repository'
 import { NotAllowedErro } from '@/shared/application/service-erros/not-allowed.erro'

@@ -15,13 +15,13 @@ describe('Create question', () => {
       authorId: '1',
       title: 'Title question',
       content: 'content question',
-      attachments: ['1', '2'],
+      attachmentsIds: ['1', '2'],
     })
 
     expect(result.isRight()).toBe(true)
     expect(questionRepository.items[0]).toEqual(result.value?.question)
-    expect(questionRepository.items[0].attachments).toHaveLength(2)
-    expect(questionRepository.items[0].attachments).toEqual([
+    expect(questionRepository.items[0].attachments.currentItems).toHaveLength(2)
+    expect(questionRepository.items[0].attachments.currentItems).toEqual([
       expect.objectContaining({
         attachmentId: new UniqueEntityUUID('1'),
       }),

@@ -1,4 +1,4 @@
-import { QuestionCommentEntity } from '@/enterprise/entities/question-comment.entity'
+import { QuestionCommentEntity } from '@/enterprise/entities/question/question-comment.entity'
 import { QuestionCommentRepository } from '@/enterprise/repositories/question/question-comment.repository'
 import { QuestionRepository } from '@/enterprise/repositories/question/question.repository'
 import { ResourceNotFoundErro } from '@/shared/application/service-erros/resource-not-found.error'

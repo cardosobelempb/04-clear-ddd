@@ -3,7 +3,7 @@ import { Slug } from '@/shared/enterprise/entities/value-objects/slug/slug'
 import { UniqueEntityUUID } from '@/shared/enterprise/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
 import { Optional } from '@/shared/enterprise/types/optional'
 import dayjs from 'dayjs'
-import { QuestionAttachmentEntity } from './question-attachment.entity'
+import { QuestionAttachmentListEntity } from './question-attachment-list.entity'
 
 export namespace QuestionProps {
   export interface Props {
@@ -12,7 +12,7 @@ export namespace QuestionProps {
     title: string
     content: string
     slug: Slug
-    attachments: QuestionAttachmentEntity[]
+    attachments: QuestionAttachmentListEntity
     createdAt: Date
     updatedAt?: Date
   }
@@ -63,7 +63,7 @@ export class QuestionEntity extends AggregateRoo<QuestionProps.Props> {
     return this.props.attachments
   }
 
-  set attachments(attachments: QuestionAttachmentEntity[]) {
+  set attachments(attachments: QuestionAttachmentListEntity) {
     this.props.attachments = attachments
   }
 
@@ -95,7 +95,7 @@ export class QuestionEntity extends AggregateRoo<QuestionProps.Props> {
       {
         ...props,
         slug: props.slug ?? Slug.createFromText(props.title),
-        attachments: props.attachments ?? [],
+        attachments: props.attachments ?? new QuestionAttachmentListEntity(),
         createdAt: props.createdAt ?? new Date(),
       },
       id,

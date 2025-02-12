@@ -1,7 +1,7 @@
 import { UniqueEntityUUID } from '@/shared/enterprise/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
 import { Optional } from '@/shared/enterprise/types/optional'
 
-import { CommentEntity, CommentProps } from './comment.entity'
+import { CommentEntity, CommentProps } from '../comment/comment.entity'
 
 export namespace AnswerCommentProps {
   export interface Props extends CommentProps.Props {

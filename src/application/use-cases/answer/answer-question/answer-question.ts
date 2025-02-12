@@ -1,4 +1,4 @@
-import { AnswerEntity } from '@/enterprise/entities/answer.entity'
+import { AnswerEntity } from '@/enterprise/entities/answer/answer.entity'
 import { AnswerRepository } from '@/enterprise/repositories/answer/answer.repository'
 import { UniqueEntityUUID } from '@/shared/enterprise/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
 import { Either, right } from '@/shared/handle-erros/either'

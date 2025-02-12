@@ -1,5 +1,6 @@
-import { QuestionAttachmentEntity } from '@/enterprise/entities/question-attachment.entity'
-import { QuestionEntity } from '@/enterprise/entities/question.entity'
+import { QuestionAttachmentListEntity } from '@/enterprise/entities/question/question-attachment-list.entity'
+import { QuestionAttachmentEntity } from '@/enterprise/entities/question/question-attachment.entity'
+import { QuestionEntity } from '@/enterprise/entities/question/question.entity'
 import { QuestionRepository } from '@/enterprise/repositories/question/question.repository'
 import { UniqueEntityUUID } from '@/shared/enterprise/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
 import { Either, right } from '@/shared/handle-erros/either'
@@ -9,7 +10,7 @@ export namespace QuestionCreate {
     authorId: string
     title: string
     content: string
-    attachments: string[]
+    attachmentsIds: string[]
   }
 
   export type Response = Either<
@@ -27,7 +28,7 @@ export class QuestionCreate {
     authorId,
     title,
     content,
-    attachments,
+    attachmentsIds,
   }: QuestionCreate.Request): Promise<QuestionCreate.Response> {
     const question = QuestionEntity.create({
       authorId: new UniqueEntityUUID(authorId),
@@ -35,14 +36,14 @@ export class QuestionCreate {
       content,
     })
 
-    const questionAttachment = attachments.map((id) => {
+    const questionAttachment = attachmentsIds.map((id) => {
       return QuestionAttachmentEntity.create({
         attachmentId: new UniqueEntityUUID(id),
         questionId: question.id,
       })
     })
 
-    question.attachments = questionAttachment
+    question.attachments = new QuestionAttachmentListEntity(questionAttachment)
 
     await this.questionRepository.create(question)
     return right({ question })
