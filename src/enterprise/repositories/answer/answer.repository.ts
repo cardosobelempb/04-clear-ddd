@@ -3,7 +3,7 @@ import { RepositoryAbstract } from '@/shared/enterprise/repository/repository.ab
 import { Pagination } from '@/shared/enterprise/repository/types/pagination'
 
 export abstract class AnswerRepository extends RepositoryAbstract<AnswerEntity> {
-  abstract findManyQuestionId(
+  abstract findManyAnswerId(
     questioId: string,
     params: Pagination.Params,
   ): Promise<AnswerEntity[]>

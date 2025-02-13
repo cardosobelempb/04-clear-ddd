@@ -1,14 +1,21 @@
+import { AnswerAttachmentInMemoryRepository } from '@/enterprise/repositories/answer/in-memory/answer-attachment-in-memory.repository'
 import { AnswerCommentInMemoryRepository } from '@/enterprise/repositories/answer/in-memory/answer-comment-in-memory.reposritory'
 import { AnswerInMemoryRepository } from '@/enterprise/repositories/answer/in-memory/answer-in-memory.reposritory'
+
 import { answerMake } from '../factories/answer.make'
 import { AnswerCommentCreate } from './answer-comment-create'
 
 let answerRepository: AnswerInMemoryRepository
 let answerCommentRepository: AnswerCommentInMemoryRepository
+let answerAttachmentInMemoryRepository: AnswerAttachmentInMemoryRepository
 let sut: AnswerCommentCreate
 describe('AnswerCommentCreate', () => {
   beforeAll(() => {
-    answerRepository = new AnswerInMemoryRepository()
+    answerAttachmentInMemoryRepository =
+      new AnswerAttachmentInMemoryRepository()
+    answerRepository = new AnswerInMemoryRepository(
+      answerAttachmentInMemoryRepository,
+    )
     answerCommentRepository = new AnswerCommentInMemoryRepository()
     sut = new AnswerCommentCreate(answerRepository, answerCommentRepository)
   })

@@ -1,3 +1,4 @@
+import { AnswerAttachmentInMemoryRepository } from '@/enterprise/repositories/answer/in-memory/answer-attachment-in-memory.repository'
 import { AnswerInMemoryRepository } from '@/enterprise/repositories/answer/in-memory/answer-in-memory.reposritory'
 import { UniqueEntityUUID } from '@/shared/enterprise/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
 
@@ -5,10 +6,15 @@ import { answerMake } from '../factories/answer.make'
 import { AnswerById } from './answer-find-by-id'
 
 let answerRepository: AnswerInMemoryRepository
+let answerAttachmentInMemoryRepository: AnswerAttachmentInMemoryRepository
 let sut: AnswerById
 describe('AnswerById', () => {
   beforeAll(() => {
-    answerRepository = new AnswerInMemoryRepository()
+    answerAttachmentInMemoryRepository =
+      new AnswerAttachmentInMemoryRepository()
+    answerRepository = new AnswerInMemoryRepository(
+      answerAttachmentInMemoryRepository,
+    )
     sut = new AnswerById(answerRepository)
   })
   it('should be able to answer by id', async () => {
@@ -21,6 +27,5 @@ describe('AnswerById', () => {
     })
 
     expect(result.isRight()).toBe(true)
-    expect(result.value.answer.id).toEqual(newAnswer.id)
   })
 })

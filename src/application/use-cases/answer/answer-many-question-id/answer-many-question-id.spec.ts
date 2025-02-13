@@ -1,3 +1,4 @@
+import { AnswerAttachmentInMemoryRepository } from '@/enterprise/repositories/answer/in-memory/answer-attachment-in-memory.repository'
 import { AnswerInMemoryRepository } from '@/enterprise/repositories/answer/in-memory/answer-in-memory.reposritory'
 import { UniqueEntityUUID } from '@/shared/enterprise/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
 
@@ -5,10 +6,15 @@ import { answerMake } from '../factories/answer.make'
 import { AnswerManyQuestionId } from './answer-many-question-id'
 
 let answerRepository: AnswerInMemoryRepository
+let answerAttachmentInMemoryRepository: AnswerAttachmentInMemoryRepository
 let sut: AnswerManyQuestionId
 describe('AnswerManyQuestionId', () => {
   beforeAll(() => {
-    answerRepository = new AnswerInMemoryRepository()
+    answerAttachmentInMemoryRepository =
+      new AnswerAttachmentInMemoryRepository()
+    answerRepository = new AnswerInMemoryRepository(
+      answerAttachmentInMemoryRepository,
+    )
     sut = new AnswerManyQuestionId(answerRepository)
   })
 

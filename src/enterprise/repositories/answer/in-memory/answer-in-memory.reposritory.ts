@@ -2,8 +2,14 @@ import { AnswerEntity } from '@/enterprise/entities/answer/answer.entity'
 import { AnswerRepository } from '@/enterprise/repositories/answer/answer.repository'
 import { Pagination } from '@/shared/enterprise/repository/types/pagination'
 
+import { AnswerAttachmentInMemoryRepository } from './answer-attachment-in-memory.repository'
+
 export class AnswerInMemoryRepository implements AnswerRepository {
   public items: AnswerEntity[] = []
+
+  constructor(
+    private readonly answerAttachmentInmemoryRepository: AnswerAttachmentInMemoryRepository,
+  ) {}
 
   async findById(id: string): Promise<AnswerEntity | null> {
     const answer = this.items.find((item) => item.id.toString() === id)
@@ -22,7 +28,7 @@ export class AnswerInMemoryRepository implements AnswerRepository {
     return answers
   }
 
-  async findManyQuestionId(
+  async findManyAnswerId(
     questioId: string,
     { page }: Pagination.Params,
   ): Promise<AnswerEntity[]> {
@@ -45,5 +51,9 @@ export class AnswerInMemoryRepository implements AnswerRepository {
   async delete(entity: AnswerEntity): Promise<void> {
     const itemIndex = this.items.findIndex((item) => item.id === entity.id)
     this.items.splice(itemIndex, 1)
+
+    this.answerAttachmentInmemoryRepository.deleteManyByEntityId(
+      entity.id.toString(),
+    )
   }
 }
