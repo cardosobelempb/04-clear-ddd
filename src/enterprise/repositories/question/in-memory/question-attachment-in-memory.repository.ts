@@ -38,4 +38,12 @@ export class QuestionAttachmentInMemoryRepository
   async delete(entity: QuestionAttachmentEntity): Promise<void> {
     throw new Error('Method not implemented.')
   }
+
+  async deleteManyByEntityId(id: string): Promise<void> {
+    const questionAttachments = this.items.filter(
+      (item) => item.questionId.toString() !== id,
+    )
+
+    this.items = questionAttachments
+  }
 }

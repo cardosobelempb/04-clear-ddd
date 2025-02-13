@@ -12,9 +12,11 @@ let questionAttachmentInMemoryRepository: QuestionAttachmentInMemoryRepository
 let sut: QuestionUpdate
 describe('QuestionUpdate', () => {
   beforeAll(() => {
-    questionInMemoryRepository = new QuestionInMemoryRepository()
     questionAttachmentInMemoryRepository =
       new QuestionAttachmentInMemoryRepository()
+    questionInMemoryRepository = new QuestionInMemoryRepository(
+      questionAttachmentInMemoryRepository,
+    )
     sut = new QuestionUpdate(
       questionAttachmentInMemoryRepository,
       questionInMemoryRepository,

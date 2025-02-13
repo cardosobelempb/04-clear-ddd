@@ -4,13 +4,20 @@ import { ResourceNotFoundErro } from '@/shared/application/service-erros/resourc
 import { UniqueEntityUUID } from '@/shared/enterprise/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
 import { questionMake } from '../factories/question.make'
 import { QuestionDelete } from './question-delete'
+import { QuestionAttachmentInMemoryRepository } from '@/enterprise/repositories/question/in-memory/question-attachment-in-memory.repository'
+import { questionAttachmentMake } from '../factories/question-attachment.make'
 
-let questionRepository: QuestionInMemoryRepository
+let questionInMemoryRepository: QuestionInMemoryRepository
+let questionAttachmentInmemoryRepository: QuestionAttachmentInMemoryRepository
 let sut: QuestionDelete
 describe('QuestionDelete', () => {
   beforeAll(() => {
-    questionRepository = new QuestionInMemoryRepository()
-    sut = new QuestionDelete(questionRepository)
+    questionAttachmentInmemoryRepository =
+      new QuestionAttachmentInMemoryRepository()
+    questionInMemoryRepository = new QuestionInMemoryRepository(
+      questionAttachmentInmemoryRepository,
+    )
+    sut = new QuestionDelete(questionInMemoryRepository)
   })
   it('should be able to delete question', async () => {
     const newQuestion = questionMake(
@@ -18,14 +25,26 @@ describe('QuestionDelete', () => {
       new UniqueEntityUUID('question-1'),
     )
 
-    await questionRepository.create(newQuestion)
+    await questionInMemoryRepository.create(newQuestion)
+
+    questionAttachmentInmemoryRepository.items.push(
+      questionAttachmentMake({
+        questionId: newQuestion.id,
+        attachmentId: new UniqueEntityUUID('1'),
+      }),
+      questionAttachmentMake({
+        questionId: newQuestion.id,
+        attachmentId: new UniqueEntityUUID('2'),
+      }),
+    )
 
     await sut.execute({
       authorId: 'author-1',
       questionId: 'question-1',
     })
 
-    expect(questionRepository.items).toHaveLength(0)
+    expect(questionInMemoryRepository.items).toHaveLength(0)
+    expect(questionAttachmentInmemoryRepository.items).toHaveLength(0)
   })
   it('should not be able to delete question from author user', async () => {
     const newQuestion = questionMake(
@@ -33,7 +52,7 @@ describe('QuestionDelete', () => {
       new UniqueEntityUUID('question-1'),
     )
 
-    await questionRepository.create(newQuestion)
+    await questionInMemoryRepository.create(newQuestion)
 
     const result = await sut.execute({
       authorId: 'author-1',

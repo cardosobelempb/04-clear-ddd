@@ -2,12 +2,18 @@ import { QuestionInMemoryRepository } from '@/enterprise/repositories/question/i
 
 import { questionMake } from '../factories/question.make'
 import { QuestionFindMany } from './question-find-many'
+import { QuestionAttachmentInMemoryRepository } from '@/enterprise/repositories/question/in-memory/question-attachment-in-memory.repository'
 
 let questionRepository: QuestionInMemoryRepository
+let questionAttachmentInmemoryRepository: QuestionAttachmentInMemoryRepository
 let sut: QuestionFindMany
 describe('QuestionMany', () => {
   beforeAll(() => {
-    questionRepository = new QuestionInMemoryRepository()
+    questionAttachmentInmemoryRepository =
+      new QuestionAttachmentInMemoryRepository()
+    questionRepository = new QuestionInMemoryRepository(
+      questionAttachmentInmemoryRepository,
+    )
     sut = new QuestionFindMany(questionRepository)
   })
 

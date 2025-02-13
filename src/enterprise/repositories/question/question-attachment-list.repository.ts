@@ -5,4 +5,6 @@ export abstract class QuestionAttachmentRepository extends RepositoryAbstract<Qu
   abstract questionAttachmentByQuestionId(
     questionId: string,
   ): Promise<QuestionAttachmentEntity[]>
+
+  abstract deleteManyByEntityId(id: string): Promise<void>
 }

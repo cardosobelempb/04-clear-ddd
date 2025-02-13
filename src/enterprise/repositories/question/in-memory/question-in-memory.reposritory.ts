@@ -1,9 +1,14 @@
 import { QuestionEntity } from '@/enterprise/entities/question/question.entity'
 import { QuestionRepository } from '@/enterprise/repositories/question/question.repository'
 import { Pagination } from '@/shared/enterprise/repository/types/pagination'
+import { QuestionAttachmentInMemoryRepository } from './question-attachment-in-memory.repository'
 
 export class QuestionInMemoryRepository implements QuestionRepository {
   public items: QuestionEntity[] = []
+
+  constructor(
+    private readonly questionAttachmentInmemoryRepository: QuestionAttachmentInMemoryRepository,
+  ) {}
 
   async findById(id: string): Promise<QuestionEntity | null> {
     const question = this.items.find((item) => item.id.toString() === id)
@@ -42,5 +47,9 @@ export class QuestionInMemoryRepository implements QuestionRepository {
   async delete(entity: QuestionEntity): Promise<void> {
     const itemIndex = this.items.findIndex((item) => item.id === entity.id)
     this.items.splice(itemIndex, 1)
+
+    this.questionAttachmentInmemoryRepository.deleteManyByEntityId(
+      entity.id.toString(),
+    )
   }
 }
