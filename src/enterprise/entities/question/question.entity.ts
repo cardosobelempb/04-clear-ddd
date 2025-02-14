@@ -1,4 +1,4 @@
-import { AggregateRoo } from '@/shared/enterprise/entities/aggregate-rrot'
+import { AggregateRoo } from '@/shared/enterprise/entities/aggregate-root'
 import { Slug } from '@/shared/enterprise/entities/value-objects/slug/slug'
 import { UniqueEntityUUID } from '@/shared/enterprise/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
 import { Optional } from '@/shared/enterprise/types/optional'
