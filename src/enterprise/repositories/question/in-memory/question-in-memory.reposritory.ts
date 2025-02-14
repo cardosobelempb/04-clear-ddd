@@ -1,6 +1,7 @@
 import { QuestionEntity } from '@/enterprise/entities/question/question.entity'
 import { QuestionRepository } from '@/enterprise/repositories/question/question.repository'
 import { Pagination } from '@/shared/enterprise/repository/types/pagination'
+
 import { QuestionAttachmentInMemoryRepository } from './question-attachment-in-memory.repository'
 
 export class QuestionInMemoryRepository implements QuestionRepository {
