@@ -1,13 +1,19 @@
+import { AnswerAttachmentInMemoryRepository } from '@/enterprise/repositories/answer/in-memory/answer-attachment-in-memory.repository'
 import { AnswerInMemoryRepository } from '@/enterprise/repositories/answer/in-memory/answer-in-memory.reposritory'
 
 import { answerMake } from '../factories/answer.make'
 import { AnswerFindMany } from './answer-find-many'
 
 let answerRepository: AnswerInMemoryRepository
+let answerAttachmentInMemoryRepository: AnswerAttachmentInMemoryRepository
 let sut: AnswerFindMany
 describe('AnswerMany', () => {
   beforeAll(() => {
-    answerRepository = new AnswerInMemoryRepository()
+    answerAttachmentInMemoryRepository =
+      new AnswerAttachmentInMemoryRepository()
+    answerRepository = new AnswerInMemoryRepository(
+      answerAttachmentInMemoryRepository,
+    )
     sut = new AnswerFindMany(answerRepository)
   })
 

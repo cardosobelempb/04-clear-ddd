@@ -20,7 +20,7 @@ export class AnswerManyQuestionId {
   constructor(private readonly answerRepository: AnswerRepository) {}
 
   async execute({ questioId, page }: Props.Request): Promise<Props.Response> {
-    const answers = await this.answerRepository.findManyQuestionId(questioId, {
+    const answers = await this.answerRepository.findManyAnswerId(questioId, {
       page,
     })
 

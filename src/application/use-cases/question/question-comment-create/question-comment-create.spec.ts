@@ -1,14 +1,21 @@
-import { QuestionInMemoryRepository } from '@/enterprise/repositories/question/in-memory/question-in-memory.reposritory'
-import { QuestionCommentCreate } from './question-comment-create'
+import { QuestionAttachmentInMemoryRepository } from '@/enterprise/repositories/question/in-memory/question-attachment-in-memory.repository'
 import { QuestionCommentInMemoryRepository } from '@/enterprise/repositories/question/in-memory/question-comment-in-memory.reposritory'
+import { QuestionInMemoryRepository } from '@/enterprise/repositories/question/in-memory/question-in-memory.reposritory'
+
 import { questionMake } from '../factories/question.make'
+import { QuestionCommentCreate } from './question-comment-create'
 
 let questionRepository: QuestionInMemoryRepository
 let questionCommentRepository: QuestionCommentInMemoryRepository
+let questionAttachmentInMemoryRepository: QuestionAttachmentInMemoryRepository
 let sut: QuestionCommentCreate
 describe('QuestionCommentCreate', () => {
   beforeAll(() => {
-    questionRepository = new QuestionInMemoryRepository()
+    questionAttachmentInMemoryRepository =
+      new QuestionAttachmentInMemoryRepository()
+    questionRepository = new QuestionInMemoryRepository(
+      questionAttachmentInMemoryRepository,
+    )
     questionCommentRepository = new QuestionCommentInMemoryRepository()
     sut = new QuestionCommentCreate(
       questionRepository,

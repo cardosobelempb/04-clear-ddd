@@ -2,11 +2,14 @@ import { Entity } from '@/shared/enterprise/entities/entity'
 import { UniqueEntityUUID } from '@/shared/enterprise/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
 import { Optional } from '@/shared/enterprise/types/optional'
 
+import { AnswerAttachmentListEntity } from './answer-attachment-list.entity'
+
 export namespace AnswerProps {
   export interface Props {
     authorId: UniqueEntityUUID
     questionId: UniqueEntityUUID
     content: string
+    attachments: AnswerAttachmentListEntity
     createdAt: Date
     updatedAt?: Date
   }
@@ -33,6 +36,15 @@ export class AnswerEntity extends Entity<AnswerProps.Props> {
     this.touch()
   }
 
+  get attachments() {
+    return this.props.attachments
+  }
+
+  set attachments(attachments: AnswerAttachmentListEntity) {
+    this.props.attachments = attachments
+    this.touch()
+  }
+
   get createdAt() {
     return this.props.createdAt
   }
@@ -50,12 +62,13 @@ export class AnswerEntity extends Entity<AnswerProps.Props> {
   }
 
   static create(
-    props: Optional<AnswerProps.Props, 'createdAt'>,
+    props: Optional<AnswerProps.Props, 'createdAt' | 'attachments'>,
     id?: UniqueEntityUUID,
   ) {
     const answer = new AnswerEntity(
       {
         ...props,
+        attachments: props.attachments ?? new AnswerAttachmentListEntity(),
         createdAt: props.createdAt ?? new Date(),
       },
       id,

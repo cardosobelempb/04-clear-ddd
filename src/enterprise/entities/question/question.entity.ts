@@ -3,6 +3,7 @@ import { Slug } from '@/shared/enterprise/entities/value-objects/slug/slug'
 import { UniqueEntityUUID } from '@/shared/enterprise/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
 import { Optional } from '@/shared/enterprise/types/optional'
 import dayjs from 'dayjs'
+
 import { QuestionAttachmentListEntity } from './question-attachment-list.entity'
 
 export namespace QuestionProps {
@@ -65,6 +66,7 @@ export class QuestionEntity extends AggregateRoo<QuestionProps.Props> {
 
   set attachments(attachments: QuestionAttachmentListEntity) {
     this.props.attachments = attachments
+    this.touch()
   }
 
   get createdAt() {

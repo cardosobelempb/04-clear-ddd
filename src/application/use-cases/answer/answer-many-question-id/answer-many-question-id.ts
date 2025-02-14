@@ -23,7 +23,7 @@ export class AnswerManyQuestionId {
     questionId,
     page,
   }: AnswerManyQuestionId.Request): Promise<AnswerManyQuestionId.Response> {
-    const answers = await this.answerRepository.findManyQuestionId(questionId, {
+    const answers = await this.answerRepository.findManyAnswerId(questionId, {
       page,
     })
 
