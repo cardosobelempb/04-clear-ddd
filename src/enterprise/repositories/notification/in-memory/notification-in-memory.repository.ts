@@ -6,11 +6,17 @@ import { NotificationRepository } from '../notification.repository'
 export class NotificationInMemoryRespository implements NotificationRepository {
   public items: NotificationEntity[] = []
 
-  findById(id: string): Promise<NotificationEntity | null> {
-    throw new Error('Method not implemented.')
+  async findById(id: string): Promise<NotificationEntity | null> {
+    const notification = this.items.find(item => item.id.toString() === id)
+
+    if (!notification) {
+      return null
+    }
+
+    return notification
   }
 
-  findMany(params: Pagination.Params): Promise<NotificationEntity[]> {
+  async findMany(params: Pagination.Params): Promise<NotificationEntity[]> {
     throw new Error('Method not implemented.')
   }
 
@@ -18,11 +24,15 @@ export class NotificationInMemoryRespository implements NotificationRepository {
     this.items.push(entity)
   }
 
-  update(entity: NotificationEntity): Promise<void> {
-    throw new Error('Method not implemented.')
+  async update(entity: NotificationEntity): Promise<void> {
+    const itemIndex = this.items.findIndex(item => item.id === entity.id)
+
+    this.items[itemIndex] = entity
   }
 
-  delete(entity: NotificationEntity): Promise<void> {
-    throw new Error('Method not implemented.')
+  async delete(entity: NotificationEntity): Promise<void> {
+    const itemIndex = this.items.findIndex(item => item.id === entity.id)
+
+    this.items.splice(itemIndex, 1)
   }
 }

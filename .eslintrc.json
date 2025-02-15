@@ -6,7 +6,13 @@
   "rules": {
     "@typescript-eslint/no-namespace": "off",
     "no-useless-constructor": "off",
-    "@typescript-eslint/no-unused-vars": "off"
+    "@typescript-eslint/no-unused-vars": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        "printWidth": 120
+      }
+    ]
   },
   "env": {
     "vitest-globals/env": true

@@ -15,10 +15,7 @@ export namespace QuestionDelete {
 export class QuestionDelete {
   constructor(private readonly questionRepository: QuestionRepository) {}
 
-  async execute({
-    authorId,
-    questionId,
-  }: QuestionDelete.Request): Promise<QuestionDelete.Response> {
+  async execute({ authorId, questionId }: QuestionDelete.Request): Promise<QuestionDelete.Response> {
     const question = await this.questionRepository.findById(questionId)
     if (!question) {
       return left(new ResourceNotFoundErro())
