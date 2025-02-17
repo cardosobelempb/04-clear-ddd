@@ -3,6 +3,8 @@ import { UniqueEntityUUID } from '@/shared/enterprise/entities/value-objects/uni
 import { Optional } from '@/shared/enterprise/types/optional'
 
 import { AnswerAttachmentListEntity } from './answer-attachment-list.entity'
+import { AggregateRoot } from '@/shared/enterprise/entities/aggregate-root'
+import { AnswerCreatedEvent } from './events/answer-create.event'
 
 export namespace AnswerProps {
   export interface Props {
@@ -18,7 +20,7 @@ export namespace AnswerProps {
   }
 }
 
-export class AnswerEntity extends Entity<AnswerProps.Props> {
+export class AnswerEntity extends AggregateRoot<AnswerProps.Props> {
   get authorId() {
     return this.props.authorId
   }
@@ -61,10 +63,7 @@ export class AnswerEntity extends Entity<AnswerProps.Props> {
     this.props.updatedAt = new Date()
   }
 
-  static create(
-    props: Optional<AnswerProps.Props, 'createdAt' | 'attachments'>,
-    id?: UniqueEntityUUID,
-  ) {
+  static create(props: Optional<AnswerProps.Props, 'createdAt' | 'attachments'>, id?: UniqueEntityUUID) {
     const answer = new AnswerEntity(
       {
         ...props,
@@ -73,6 +72,12 @@ export class AnswerEntity extends Entity<AnswerProps.Props> {
       },
       id,
     )
+
+    const isNewAnswer = !id
+
+    if (isNewAnswer) {
+      answer.addDomainEvent(new AnswerCreatedEvent(answer))
+    }
 
     return answer
   }
