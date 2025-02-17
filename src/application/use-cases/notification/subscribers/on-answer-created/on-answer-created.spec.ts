@@ -6,9 +6,9 @@ import { QuestionInMemoryRepository } from '@/enterprise/repositories/question/i
 import { waitFor } from '@/shared/utils/wait-for'
 import { MockInstance } from 'vitest'
 
-import { answerMake } from '../../answer/factories/answer.make'
-import { questionMake } from '../../question/factories/question.make'
-import { NotificationSendUseCase } from '../notification-send/notification-send.usecase'
+import { answerMake } from '../../../answer/factories/answer.make'
+import { questionMake } from '../../../question/factories/question.make'
+import { NotificationSendUseCase } from '../../notification-send/notification-send.usecase'
 import { OnAnswerCreated } from './on-answer-created'
 
 let answerAttachmentInmemoryRepository: AnswerAttachmentInMemoryRepository

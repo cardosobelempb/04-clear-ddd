@@ -3,7 +3,7 @@ import { QuestionRepository } from '@/enterprise/repositories/question/question.
 import { DomainEvents } from '@/shared/events/domain-events'
 import { EventHandler } from '@/shared/events/event-handler'
 
-import { NotificationSendUseCase } from '../notification-send/notification-send.usecase'
+import { NotificationSendUseCase } from '../../notification-send/notification-send.usecase'
 
 export class OnAnswerCreated implements EventHandler {
   constructor(

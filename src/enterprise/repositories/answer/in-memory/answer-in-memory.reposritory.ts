@@ -1,9 +1,9 @@
 import { AnswerEntity } from '@/enterprise/entities/answer/answer.entity'
 import { AnswerRepository } from '@/enterprise/repositories/answer/answer.repository'
 import { Pagination } from '@/shared/enterprise/repository/types/pagination'
+import { DomainEvents } from '@/shared/events/domain-events'
 
 import { AnswerAttachmentInMemoryRepository } from './answer-attachment-in-memory.repository'
-import { DomainEvents } from '@/shared/events/domain-events'
 
 export class AnswerInMemoryRepository implements AnswerRepository {
   public items: AnswerEntity[] = []
