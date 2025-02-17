@@ -3,7 +3,7 @@ import { NotificationRepository } from '@/enterprise/repositories/notification/n
 import { UniqueEntityUUID } from '@/shared/enterprise/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
 import { Either, right } from '@/shared/handle-erros/either'
 
-export namespace Props {
+export namespace NotificationSendProps {
   export interface Request {
     recipientId: string
     title: string
@@ -19,15 +19,13 @@ export namespace Props {
 }
 
 export class NotificationSendUseCase {
-  constructor(
-    private readonly notificationRepository: NotificationRepository,
-  ) {}
+  constructor(private readonly notificationRepository: NotificationRepository) {}
 
   async execute({
     recipientId,
     title,
     content,
-  }: Props.Request): Promise<Props.Response> {
+  }: NotificationSendProps.Request): Promise<NotificationSendProps.Response> {
     const notification = NotificationEntity.create({
       recipientId: new UniqueEntityUUID(recipientId),
       title,
