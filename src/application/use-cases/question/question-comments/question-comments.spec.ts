@@ -16,15 +16,9 @@ describe('QuestionCommentsService', () => {
   })
 
   it('should be able to question comments', async () => {
-    await questionComentRepository.create(
-      questionCommentMake({ questionId: new UniqueEntityUUID('question-1') }),
-    )
-    await questionComentRepository.create(
-      questionCommentMake({ questionId: new UniqueEntityUUID('question-1') }),
-    )
-    await questionComentRepository.create(
-      questionCommentMake({ questionId: new UniqueEntityUUID('question-1') }),
-    )
+    await questionComentRepository.create(questionCommentMake({ questionId: new UniqueEntityUUID('question-1') }))
+    await questionComentRepository.create(questionCommentMake({ questionId: new UniqueEntityUUID('question-1') }))
+    await questionComentRepository.create(questionCommentMake({ questionId: new UniqueEntityUUID('question-1') }))
 
     const result = await sut.execute({
       questionId: 'question-1',
@@ -36,9 +30,7 @@ describe('QuestionCommentsService', () => {
 
   it('should be able to pagination question comments', async () => {
     for (let i = 1; i <= 22; i++) {
-      await questionComentRepository.create(
-        questionCommentMake({ questionId: new UniqueEntityUUID('question-1') }),
-      )
+      await questionComentRepository.create(questionCommentMake({ questionId: new UniqueEntityUUID('question-1') }))
     }
 
     const result = await sut.execute({

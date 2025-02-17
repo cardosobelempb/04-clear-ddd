@@ -13,16 +13,13 @@ export namespace QuestionCommentDelete {
 }
 
 export class QuestionCommentDelete {
-  constructor(
-    private readonly questionCommentRepository: QuestionCommentRepository,
-  ) {}
+  constructor(private readonly questionCommentRepository: QuestionCommentRepository) {}
 
   async execute({
     authorId,
     questionCommentId,
   }: QuestionCommentDelete.Request): Promise<QuestionCommentDelete.Response> {
-    const questionComment =
-      await this.questionCommentRepository.findById(questionCommentId)
+    const questionComment = await this.questionCommentRepository.findById(questionCommentId)
 
     if (!questionComment) {
       return left(new ResourceNotFoundErro())

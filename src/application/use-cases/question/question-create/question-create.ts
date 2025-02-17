@@ -36,7 +36,7 @@ export class QuestionCreate {
       content,
     })
 
-    const questionAttachment = attachmentsIds.map((id) => {
+    const questionAttachment = attachmentsIds.map(id => {
       return QuestionAttachmentEntity.create({
         attachmentId: new UniqueEntityUUID(id),
         questionId: question.id,

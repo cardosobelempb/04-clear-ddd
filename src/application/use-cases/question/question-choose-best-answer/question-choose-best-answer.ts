@@ -25,19 +25,14 @@ export class QuestionChooseBestAnswer {
     private readonly questionRepository: QuestionRepository,
   ) {}
 
-  async execute({
-    authorId,
-    answerId,
-  }: QuestionChooseBestAnswer.Request): Promise<QuestionChooseBestAnswer.Response> {
+  async execute({ authorId, answerId }: QuestionChooseBestAnswer.Request): Promise<QuestionChooseBestAnswer.Response> {
     const answer = await this.answerRepository.findById(answerId)
 
     if (!answer) {
       return left(new ResourceNotFoundErro())
     }
 
-    const question = await this.questionRepository.findById(
-      answer.questionId.toString(),
-    )
+    const question = await this.questionRepository.findById(answer.questionId.toString())
 
     if (!question) {
       return left(new ResourceNotFoundErro())

@@ -17,10 +17,7 @@ export class QuestionCommentEntity extends CommentEntity<QuestionCommentProps.Pr
     return this.props.questionId
   }
 
-  static create(
-    props: Optional<QuestionCommentProps.Props, 'createdAt'>,
-    id?: UniqueEntityUUID,
-  ) {
+  static create(props: Optional<QuestionCommentProps.Props, 'createdAt'>, id?: UniqueEntityUUID) {
     const questionComment = new QuestionCommentEntity(
       {
         ...props,
