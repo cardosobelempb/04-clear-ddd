@@ -2,7 +2,7 @@ import { AggregateRoot } from '../enterprise/entities/aggregate-root'
 import { UniqueEntityUUID } from '../enterprise/entities/value-objects/unique-entity-uuid/unique-entity-uuid'
 import { DomainEvent } from './domain-event'
 
-type DomainEventCallback = (event: unknown) => void
+type DomainEventCallback = (event: any) => void
 
 export class DomainEvents {
   private static handlersMap: Record<string, DomainEventCallback[]> = {}

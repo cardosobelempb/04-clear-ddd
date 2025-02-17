@@ -3,16 +3,15 @@ import { AnswerRepository } from '@/enterprise/repositories/answer/answer.reposi
 import { Pagination } from '@/shared/enterprise/repository/types/pagination'
 
 import { AnswerAttachmentInMemoryRepository } from './answer-attachment-in-memory.repository'
+import { DomainEvents } from '@/shared/events/domain-events'
 
 export class AnswerInMemoryRepository implements AnswerRepository {
   public items: AnswerEntity[] = []
 
-  constructor(
-    private readonly answerAttachmentInmemoryRepository: AnswerAttachmentInMemoryRepository,
-  ) {}
+  constructor(private readonly answerAttachmentInmemoryRepository: AnswerAttachmentInMemoryRepository) {}
 
   async findById(id: string): Promise<AnswerEntity | null> {
-    const answer = this.items.find((item) => item.id.toString() === id)
+    const answer = this.items.find(item => item.id.toString() === id)
     if (!answer) {
       return null
     }
@@ -28,12 +27,9 @@ export class AnswerInMemoryRepository implements AnswerRepository {
     return answers
   }
 
-  async findManyAnswerId(
-    questioId: string,
-    { page }: Pagination.Params,
-  ): Promise<AnswerEntity[]> {
+  async findManyAnswerId(questioId: string, { page }: Pagination.Params): Promise<AnswerEntity[]> {
     const answers = this.items
-      .filter((item) => item.questionId.toString() === questioId)
+      .filter(item => item.questionId.toString() === questioId)
       .slice((page - 1) * 20, page * 20)
 
     return answers
@@ -41,19 +37,21 @@ export class AnswerInMemoryRepository implements AnswerRepository {
 
   async create(entity: AnswerEntity): Promise<void> {
     this.items.push(entity)
+    DomainEvents.dispatchEventsForAggregate(entity.id)
   }
 
   async update(entity: AnswerEntity): Promise<void> {
-    const itemIndex = this.items.findIndex((item) => item.id === entity.id)
+    const itemIndex = this.items.findIndex(item => item.id === entity.id)
+
     this.items[itemIndex] = entity
+
+    DomainEvents.dispatchEventsForAggregate(entity.id)
   }
 
   async delete(entity: AnswerEntity): Promise<void> {
-    const itemIndex = this.items.findIndex((item) => item.id === entity.id)
+    const itemIndex = this.items.findIndex(item => item.id === entity.id)
     this.items.splice(itemIndex, 1)
 
-    this.answerAttachmentInmemoryRepository.deleteManyByEntityId(
-      entity.id.toString(),
-    )
+    this.answerAttachmentInmemoryRepository.deleteManyByEntityId(entity.id.toString())
   }
 }
